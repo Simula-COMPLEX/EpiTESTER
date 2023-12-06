@@ -1,0 +1,203 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>alg.epiga.epigeneticindividual &#8212; epiGA 1.0 documentation</title>
+    <link rel="stylesheet" href="../../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epiGA 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for alg.epiga.epigeneticindividual</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># file  :  epigeneticindividual.py</span>
+<span class="c1"># author:  Daniel H. Stolfi</span>
+<span class="c1"># date  :  2019-08-15</span>
+<span class="c1">#</span>
+<span class="c1"># Daniel H. Stolfi and Enrique Alba. Epigenetic algorithms: A New way of building GAs based on epigenetics.</span>
+<span class="c1"># In: Information Sciences, vol. 424, Supplement C, pp. 250–272, 2018.</span>
+<span class="c1"># doi&gt; 10.1016/j.ins.2017.10.005</span>
+
+<span class="kn">from</span> <span class="nn">.epigeneticcell</span> <span class="k">import</span> <span class="n">EpigeneticCell</span>
+<span class="kn">from</span> <span class="nn">.problems.problem</span> <span class="k">import</span> <span class="n">Problem</span>
+
+
+<div class="viewcode-block" id="EpigeneticIndividual"><a class="viewcode-back" href="../../../index.html#alg.epiga.epigeneticindividual.EpigeneticIndividual">[docs]</a><span class="k">class</span> <span class="nc">EpigeneticIndividual</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Epigenetic Individual.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">problem</span><span class="p">,</span> <span class="n">n_cells</span><span class="p">,</span> <span class="n">cells</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor.</span>
+
+<span class="sd">        :param Problem problem: the problem.</span>
+<span class="sd">        :param int n_cells: the number of cells</span>
+<span class="sd">        :param list[EpigeneticCell] cells: an optional list of EpigeneticCells of size n_cells.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__problem</span> <span class="o">=</span> <span class="n">problem</span>
+        <span class="k">if</span> <span class="n">cells</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__cells</span> <span class="o">=</span> <span class="p">[</span><span class="n">EpigeneticCell</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__problem</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_cells</span><span class="p">)]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__cells</span> <span class="o">=</span> <span class="n">cells</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">string</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">cell</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__cells</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">string</span> <span class="o">+=</span> <span class="s2">&quot;Cell </span><span class="si">{}</span><span class="s2">:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="n">string</span>
+
+<div class="viewcode-block" id="EpigeneticIndividual.duplicate"><a class="viewcode-back" href="../../../index.html#alg.epiga.epigeneticindividual.EpigeneticIndividual.duplicate">[docs]</a>    <span class="k">def</span> <span class="nf">duplicate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Duplicates the EpigeneticIndividual.</span>
+
+<span class="sd">        :return: a copy of the EpigeneticIndividual.</span>
+<span class="sd">        :rtype: EpigeneticIndividual</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">temp_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__cells</span><span class="p">:</span>
+            <span class="n">temp_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">EpigeneticCell</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__problem</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">nucleosomes</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">solution</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">fitness</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">EpigeneticIndividual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__problem</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">temp_list</span><span class="p">),</span> <span class="n">temp_list</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="EpigeneticIndividual.replicate"><a class="viewcode-back" href="../../../index.html#alg.epiga.epigeneticindividual.EpigeneticIndividual.replicate">[docs]</a>    <span class="k">def</span> <span class="nf">replicate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Duplicates the EpigeneticIndividual and set all its cells as a copy of the best EpigeneticCell.</span>
+
+<span class="sd">        :return: a copy of the EpigeneticIndividual.</span>
+<span class="sd">        :rtype: EpigeneticIndividual</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">temp_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_best_cell</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__cells</span><span class="p">)):</span>
+            <span class="n">temp_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">duplicate</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">EpigeneticIndividual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__problem</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">temp_list</span><span class="p">),</span> <span class="n">temp_list</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="EpigeneticIndividual.evaluate"><a class="viewcode-back" href="../../../index.html#alg.epiga.epigeneticindividual.EpigeneticIndividual.evaluate">[docs]</a>    <span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Evaluates the EpigeneticIndividual by evaluating of the EpigeneticCells in it.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__cells</span><span class="p">:</span>
+            <span class="n">cell</span><span class="o">.</span><span class="n">evaluate</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="EpigeneticIndividual.get_best_cell"><a class="viewcode-back" href="../../../index.html#alg.epiga.epigeneticindividual.EpigeneticIndividual.get_best_cell">[docs]</a>    <span class="k">def</span> <span class="nf">get_best_cell</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the best EpigeneticCell in the EpigeneticIndividual.</span>
+
+<span class="sd">        :return: the best EpigeneticCell in the EpigeneticIndividual.</span>
+<span class="sd">        :rtype: EpigeneticCell</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">best_c</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__cells</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">is_better</span><span class="p">(</span><span class="n">best_c</span><span class="p">):</span>
+                <span class="n">best_c</span> <span class="o">=</span> <span class="n">c</span>
+        <span class="k">return</span> <span class="n">best_c</span></div>
+
+<div class="viewcode-block" id="EpigeneticIndividual.get_best_fitness"><a class="viewcode-back" href="../../../index.html#alg.epiga.epigeneticindividual.EpigeneticIndividual.get_best_fitness">[docs]</a>    <span class="k">def</span> <span class="nf">get_best_fitness</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the fitness of the best EpigeneticCell in the EpigeneticIndividual.</span>
+
+<span class="sd">        :return: the fitness of the best EpigeneticCell in the EpigeneticIndividual.</span>
+<span class="sd">        :rtype: float</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_best_cell</span><span class="p">()</span><span class="o">.</span><span class="n">fitness</span></div>
+
+<div class="viewcode-block" id="EpigeneticIndividual.is_better"><a class="viewcode-back" href="../../../index.html#alg.epiga.epigeneticindividual.EpigeneticIndividual.is_better">[docs]</a>    <span class="k">def</span> <span class="nf">is_better</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">individual</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns **True** if the EpigeneticIndividual is better than ``individual``.</span>
+
+<span class="sd">        :param EpigeneticIndividual individual: the individual.</span>
+<span class="sd">        :return: True if the EpigeneticIndividual is better than individual.</span>
+<span class="sd">        :rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_best_cell</span><span class="p">()</span><span class="o">.</span><span class="n">is_better</span><span class="p">(</span><span class="n">individual</span><span class="o">.</span><span class="n">get_best_cell</span><span class="p">())</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">cells</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the EpigeneticCells in the EpigeneticIndividual.</span>
+
+<span class="sd">        :return: the EpigeneticCells in the EpigeneticIndividual.</span>
+<span class="sd">        :rtype: list[EpigeneticCell]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__cells</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">problem</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the Problem.</span>
+
+<span class="sd">        :return: the problem.</span>
+<span class="sd">        :rtype: Problem</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__problem</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epiGA 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Daniel H. Stolfi.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
+    </div>
+  </body>
+</html>
