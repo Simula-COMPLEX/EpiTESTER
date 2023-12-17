@@ -61,4 +61,5 @@ easy_install carla/PythonAPI/carla/dist/carla-0.9.10-py3.7-linux-x86_64.egg
 
 # Scenario Generation
 
+<div align=center><img src="https://github.com/Simula-COMPLEX/EpiTESTER/blob/main/assets/gene_expression_probabilities.png" width="960" /></div>
 
