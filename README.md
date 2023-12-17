@@ -7,6 +7,8 @@
 ## Table of Contents
 - [Abstract](#abstract)
 - [Running Environment](#running-environment)
+- [Scenario Generation](#scenario-generation)
+
 
 ## Abstract
 Testing autonomous vehicles (AVs) under various environmental scenarios that lead the vehicles to unsafe situations is known to be challenging. Given the infinite possible environmental scenarios, it is essential to find critical scenarios efficiently. To this end, we propose a novel testing method, named EpiTESTER, by taking inspiration from epigenetics, which enables species to adapt to sudden environmental changes. In particular, EpiTESTER adopts gene silencing as its epigenetic mechanism, which regulates gene expression to prevent the expression of a certain gene, and the probability of gene expression is dynamically computed as the environment changes. Given different data modalities (e.g., images, lidar point clouds) in the context of AV, EpiTESTER benefits from a multi-model fusion transformer to extract high-level feature representations from environmental factors and then calculates probabilities based on these features with the attention mechanism. To assess the cost-effectiveness of EpiTESTER, we compare it with a classical genetic algorithm (GA) (i.e., without any epigenetic mechanism implemented) and EpiTESTER with equal probability for each gene. We evaluate EpiTESTER with four initial environments from CARLA, an open-source simulator for autonomous driving research, and an end-to-end AV controller, Interfuser. Our results show that EpiTESTER achieved a promising performance in identifying critical scenarios compared to the baselines, showing that applying epigenetic mechanisms is a good option for solving practical problems.
@@ -55,3 +57,8 @@ chmod +x setup_carla.sh
 ./setup_carla.sh
 easy_install carla/PythonAPI/carla/dist/carla-0.9.10-py3.7-linux-x86_64.egg
 ```
+
+
+# Scenario Generation
+
+
