@@ -80,7 +80,7 @@ def main(args):
     optimizer = optim.AdamW(model.parameters(), lr=args.learning_rate)
 
     engine = TrainingEngine(model=model, optimizer=optimizer, dataloader_train=dataloader_train, dataloader_val=dataloader_train)
-    engine.train(20000, log_n='log_{}_{}_{}_{}_{}'.format(args.learning_rate, args.batch, args.file_name, args.run, args.tag))
+    engine.train(10000, log_n='log_{}_{}_{}_{}_{}'.format(args.learning_rate, args.batch, args.file_name, args.run, args.tag))
     engine.save_model(model_path='model_{}_{}_{}_{}_{}.pth'.format(args.learning_rate, args.batch, args.file_name, args.run, args.tag))
 
 
@@ -90,7 +90,7 @@ if __name__ == '__main__':
                         help='dataset used for training')
     parser.add_argument('--learning_rate', type=float, default=1e-4,
                         help='dataset used for training')
-    parser.add_argument('--batch', type=int, default=4,
+    parser.add_argument('--batch', type=int, default=64,
                         help='dataset used for training')
     parser.add_argument('--run', type=int, default=1,
                         help='run')
