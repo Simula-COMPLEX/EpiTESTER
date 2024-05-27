@@ -1,0 +1,3865 @@
+EpigeneticModel(
+  (avgpool_img): AdaptiveAvgPool2d(output_size=(5, 22))
+  (avgpool_lidar): AdaptiveAvgPool2d(output_size=(8, 8))
+  (image_encoder): ImageCNN(
+    (features): RegNet(
+      (stem): ConvBnAct(
+        (conv): Conv2d(3, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (bn): BatchNormAct2d(
+          32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+          (act): ReLU(inplace=True)
+        )
+      )
+      (s1): RegStage(
+        (b1): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(32, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(48, 48, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=2, bias=False)
+            (bn): BatchNormAct2d(
+              48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(48, 8, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(8, 48, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(48, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+          (downsample): ConvBnAct(
+            (conv): Conv2d(32, 48, kernel_size=(1, 1), stride=(2, 2), bias=False)
+            (bn): BatchNormAct2d(
+              48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+        )
+        (b2): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(48, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=2, bias=False)
+            (bn): BatchNormAct2d(
+              48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(48, 12, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(12, 48, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(48, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+      )
+      (s2): RegStage(
+        (b1): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(48, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=5, bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(120, 12, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(12, 120, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+          (downsample): ConvBnAct(
+            (conv): Conv2d(48, 120, kernel_size=(1, 1), stride=(2, 2), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+        )
+        (b2): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=5, bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(120, 30, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(30, 120, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b3): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=5, bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(120, 30, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(30, 120, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b4): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=5, bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(120, 30, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(30, 120, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b5): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=5, bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(120, 30, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(30, 120, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b6): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=5, bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(120, 30, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(30, 120, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+      )
+      (s3): RegStage(
+        (b1): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(120, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 30, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(30, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+          (downsample): ConvBnAct(
+            (conv): Conv2d(120, 336, kernel_size=(1, 1), stride=(2, 2), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+        )
+        (b2): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b3): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b4): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b5): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b6): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b7): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b8): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b9): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b10): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b11): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b12): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b13): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b14): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b15): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b16): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b17): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+      )
+      (s4): RegStage(
+        (b1): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 888, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              888, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(888, 888, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=37, bias=False)
+            (bn): BatchNormAct2d(
+              888, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(888, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 888, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(888, 888, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              888, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+          (downsample): ConvBnAct(
+            (conv): Conv2d(336, 888, kernel_size=(1, 1), stride=(2, 2), bias=False)
+            (bn): BatchNormAct2d(
+              888, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+        )
+        (b2): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(888, 888, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              888, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(888, 888, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=37, bias=False)
+            (bn): BatchNormAct2d(
+              888, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(888, 222, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(222, 888, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(888, 888, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              888, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+      )
+      (head): Sequential()
+      (conv1): Conv2d(3, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNormAct2d(
+        32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+        (act): ReLU(inplace=True)
+      )
+      (act1): Sequential()
+      (maxpool): Sequential()
+      (layer1): RegStage(
+        (b1): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(32, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(48, 48, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=2, bias=False)
+            (bn): BatchNormAct2d(
+              48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(48, 8, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(8, 48, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(48, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+          (downsample): ConvBnAct(
+            (conv): Conv2d(32, 48, kernel_size=(1, 1), stride=(2, 2), bias=False)
+            (bn): BatchNormAct2d(
+              48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+        )
+        (b2): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(48, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=2, bias=False)
+            (bn): BatchNormAct2d(
+              48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(48, 12, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(12, 48, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(48, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+      )
+      (layer2): RegStage(
+        (b1): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(48, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=5, bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(120, 12, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(12, 120, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+          (downsample): ConvBnAct(
+            (conv): Conv2d(48, 120, kernel_size=(1, 1), stride=(2, 2), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+        )
+        (b2): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=5, bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(120, 30, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(30, 120, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b3): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=5, bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(120, 30, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(30, 120, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b4): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=5, bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(120, 30, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(30, 120, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b5): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=5, bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(120, 30, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(30, 120, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b6): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=5, bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(120, 30, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(30, 120, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+      )
+      (layer3): RegStage(
+        (b1): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(120, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 30, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(30, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+          (downsample): ConvBnAct(
+            (conv): Conv2d(120, 336, kernel_size=(1, 1), stride=(2, 2), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+        )
+        (b2): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b3): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b4): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b5): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b6): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b7): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b8): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b9): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b10): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b11): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b12): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b13): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b14): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b15): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b16): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b17): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+      )
+      (layer4): RegStage(
+        (b1): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 888, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              888, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(888, 888, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=37, bias=False)
+            (bn): BatchNormAct2d(
+              888, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(888, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 888, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(888, 888, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              888, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+          (downsample): ConvBnAct(
+            (conv): Conv2d(336, 888, kernel_size=(1, 1), stride=(2, 2), bias=False)
+            (bn): BatchNormAct2d(
+              888, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+        )
+        (b2): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(888, 888, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              888, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(888, 888, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=37, bias=False)
+            (bn): BatchNormAct2d(
+              888, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(888, 222, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(222, 888, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(888, 888, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              888, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+      )
+      (global_pool): AdaptiveAvgPool2d(output_size=1)
+    )
+  )
+  (lidar_encoder): LidarEncoder(
+    (_model): RegNet(
+      (stem): ConvBnAct(
+        (bn): BatchNormAct2d(
+          32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+          (act): ReLU(inplace=True)
+        )
+      )
+      (s1): RegStage(
+        (b1): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(32, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(48, 48, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=2, bias=False)
+            (bn): BatchNormAct2d(
+              48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(48, 8, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(8, 48, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(48, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+          (downsample): ConvBnAct(
+            (conv): Conv2d(32, 48, kernel_size=(1, 1), stride=(2, 2), bias=False)
+            (bn): BatchNormAct2d(
+              48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+        )
+        (b2): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(48, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=2, bias=False)
+            (bn): BatchNormAct2d(
+              48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(48, 12, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(12, 48, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(48, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+      )
+      (s2): RegStage(
+        (b1): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(48, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=5, bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(120, 12, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(12, 120, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+          (downsample): ConvBnAct(
+            (conv): Conv2d(48, 120, kernel_size=(1, 1), stride=(2, 2), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+        )
+        (b2): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=5, bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(120, 30, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(30, 120, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b3): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=5, bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(120, 30, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(30, 120, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b4): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=5, bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(120, 30, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(30, 120, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b5): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=5, bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(120, 30, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(30, 120, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b6): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=5, bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(120, 30, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(30, 120, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+      )
+      (s3): RegStage(
+        (b1): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(120, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 30, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(30, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+          (downsample): ConvBnAct(
+            (conv): Conv2d(120, 336, kernel_size=(1, 1), stride=(2, 2), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+        )
+        (b2): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b3): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b4): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b5): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b6): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b7): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b8): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b9): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b10): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b11): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b12): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b13): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b14): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b15): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b16): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b17): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+      )
+      (s4): RegStage(
+        (b1): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 888, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              888, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(888, 888, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=37, bias=False)
+            (bn): BatchNormAct2d(
+              888, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(888, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 888, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(888, 888, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              888, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+          (downsample): ConvBnAct(
+            (conv): Conv2d(336, 888, kernel_size=(1, 1), stride=(2, 2), bias=False)
+            (bn): BatchNormAct2d(
+              888, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+        )
+        (b2): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(888, 888, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              888, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(888, 888, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=37, bias=False)
+            (bn): BatchNormAct2d(
+              888, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(888, 222, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(222, 888, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(888, 888, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              888, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+      )
+      (head): Sequential()
+      (conv1): Conv2d(3, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNormAct2d(
+        32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+        (act): ReLU(inplace=True)
+      )
+      (act1): Sequential()
+      (maxpool): Sequential()
+      (layer1): RegStage(
+        (b1): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(32, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(48, 48, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=2, bias=False)
+            (bn): BatchNormAct2d(
+              48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(48, 8, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(8, 48, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(48, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+          (downsample): ConvBnAct(
+            (conv): Conv2d(32, 48, kernel_size=(1, 1), stride=(2, 2), bias=False)
+            (bn): BatchNormAct2d(
+              48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+        )
+        (b2): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(48, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=2, bias=False)
+            (bn): BatchNormAct2d(
+              48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(48, 12, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(12, 48, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(48, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+      )
+      (layer2): RegStage(
+        (b1): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(48, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=5, bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(120, 12, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(12, 120, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+          (downsample): ConvBnAct(
+            (conv): Conv2d(48, 120, kernel_size=(1, 1), stride=(2, 2), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+        )
+        (b2): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=5, bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(120, 30, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(30, 120, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b3): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=5, bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(120, 30, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(30, 120, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b4): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=5, bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(120, 30, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(30, 120, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b5): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=5, bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(120, 30, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(30, 120, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b6): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=5, bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(120, 30, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(30, 120, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(120, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+      )
+      (layer3): RegStage(
+        (b1): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(120, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 30, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(30, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+          (downsample): ConvBnAct(
+            (conv): Conv2d(120, 336, kernel_size=(1, 1), stride=(2, 2), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+        )
+        (b2): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b3): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b4): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b5): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b6): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b7): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b8): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b9): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b10): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b11): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b12): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b13): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b14): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b15): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b16): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+        (b17): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=14, bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(336, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 336, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(336, 336, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              336, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+      )
+      (layer4): RegStage(
+        (b1): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(336, 888, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              888, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(888, 888, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=37, bias=False)
+            (bn): BatchNormAct2d(
+              888, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(888, 84, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(84, 888, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(888, 888, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              888, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+          (downsample): ConvBnAct(
+            (conv): Conv2d(336, 888, kernel_size=(1, 1), stride=(2, 2), bias=False)
+            (bn): BatchNormAct2d(
+              888, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+        )
+        (b2): Bottleneck(
+          (conv1): ConvBnAct(
+            (conv): Conv2d(888, 888, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              888, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (conv2): ConvBnAct(
+            (conv): Conv2d(888, 888, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=37, bias=False)
+            (bn): BatchNormAct2d(
+              888, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): ReLU(inplace=True)
+            )
+          )
+          (se): SEModule(
+            (fc1): Conv2d(888, 222, kernel_size=(1, 1), stride=(1, 1))
+            (bn): Identity()
+            (act): ReLU(inplace=True)
+            (fc2): Conv2d(222, 888, kernel_size=(1, 1), stride=(1, 1))
+            (gate): Sigmoid()
+          )
+          (conv3): ConvBnAct(
+            (conv): Conv2d(888, 888, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNormAct2d(
+              888, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True
+              (act): Identity()
+            )
+          )
+          (act3): ReLU(inplace=True)
+        )
+      )
+      (global_pool): AdaptiveAvgPool2d(output_size=1)
+    )
+  )
+  (embeddings): Embedding(10, 48)
+  (fc_l): Linear(in_features=10, out_features=10, bias=True)
+  (conv1): Conv1d(1, 16, kernel_size=(3,), stride=(1,))
+  (conv2): Conv1d(16, 32, kernel_size=(3,), stride=(1,))
+  (conv3): Conv1d(32, 64, kernel_size=(3,), stride=(1,))
+  (conv4): Conv1d(64, 32, kernel_size=(3,), stride=(1,))
+  (fc2): Linear(in_features=3136, out_features=512, bias=True)
+  (fc3): Linear(in_features=512, out_features=256, bias=True)
+  (fc4): Linear(in_features=256, out_features=128, bias=True)
+  (fc5): Linear(in_features=128, out_features=1, bias=True)
+  (transformer1): GPT(
+    (drop): Dropout(p=0.1, inplace=False)
+    (blocks): Sequential(
+      (0): Block(
+        (ln1): LayerNorm((48,), eps=1e-05, elementwise_affine=True)
+        (ln2): LayerNorm((48,), eps=1e-05, elementwise_affine=True)
+        (attn): SelfAttention(
+          (key): Linear(in_features=48, out_features=48, bias=True)
+          (query): Linear(in_features=48, out_features=48, bias=True)
+          (value): Linear(in_features=48, out_features=48, bias=True)
+          (attn_drop): Dropout(p=0.1, inplace=False)
+          (resid_drop): Dropout(p=0.1, inplace=False)
+          (proj): Linear(in_features=48, out_features=48, bias=True)
+        )
+        (mlp): Sequential(
+          (0): Linear(in_features=48, out_features=192, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=192, out_features=48, bias=True)
+          (3): Dropout(p=0.1, inplace=False)
+        )
+      )
+      (1): Block(
+        (ln1): LayerNorm((48,), eps=1e-05, elementwise_affine=True)
+        (ln2): LayerNorm((48,), eps=1e-05, elementwise_affine=True)
+        (attn): SelfAttention(
+          (key): Linear(in_features=48, out_features=48, bias=True)
+          (query): Linear(in_features=48, out_features=48, bias=True)
+          (value): Linear(in_features=48, out_features=48, bias=True)
+          (attn_drop): Dropout(p=0.1, inplace=False)
+          (resid_drop): Dropout(p=0.1, inplace=False)
+          (proj): Linear(in_features=48, out_features=48, bias=True)
+        )
+        (mlp): Sequential(
+          (0): Linear(in_features=48, out_features=192, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=192, out_features=48, bias=True)
+          (3): Dropout(p=0.1, inplace=False)
+        )
+      )
+      (2): Block(
+        (ln1): LayerNorm((48,), eps=1e-05, elementwise_affine=True)
+        (ln2): LayerNorm((48,), eps=1e-05, elementwise_affine=True)
+        (attn): SelfAttention(
+          (key): Linear(in_features=48, out_features=48, bias=True)
+          (query): Linear(in_features=48, out_features=48, bias=True)
+          (value): Linear(in_features=48, out_features=48, bias=True)
+          (attn_drop): Dropout(p=0.1, inplace=False)
+          (resid_drop): Dropout(p=0.1, inplace=False)
+          (proj): Linear(in_features=48, out_features=48, bias=True)
+        )
+        (mlp): Sequential(
+          (0): Linear(in_features=48, out_features=192, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=192, out_features=48, bias=True)
+          (3): Dropout(p=0.1, inplace=False)
+        )
+      )
+      (3): Block(
+        (ln1): LayerNorm((48,), eps=1e-05, elementwise_affine=True)
+        (ln2): LayerNorm((48,), eps=1e-05, elementwise_affine=True)
+        (attn): SelfAttention(
+          (key): Linear(in_features=48, out_features=48, bias=True)
+          (query): Linear(in_features=48, out_features=48, bias=True)
+          (value): Linear(in_features=48, out_features=48, bias=True)
+          (attn_drop): Dropout(p=0.1, inplace=False)
+          (resid_drop): Dropout(p=0.1, inplace=False)
+          (proj): Linear(in_features=48, out_features=48, bias=True)
+        )
+        (mlp): Sequential(
+          (0): Linear(in_features=48, out_features=192, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=192, out_features=48, bias=True)
+          (3): Dropout(p=0.1, inplace=False)
+        )
+      )
+    )
+    (ln_f): LayerNorm((48,), eps=1e-05, elementwise_affine=True)
+  )
+  (transformer2): GPT(
+    (drop): Dropout(p=0.1, inplace=False)
+    (blocks): Sequential(
+      (0): Block(
+        (ln1): LayerNorm((120,), eps=1e-05, elementwise_affine=True)
+        (ln2): LayerNorm((120,), eps=1e-05, elementwise_affine=True)
+        (attn): SelfAttention(
+          (key): Linear(in_features=120, out_features=120, bias=True)
+          (query): Linear(in_features=120, out_features=120, bias=True)
+          (value): Linear(in_features=120, out_features=120, bias=True)
+          (attn_drop): Dropout(p=0.1, inplace=False)
+          (resid_drop): Dropout(p=0.1, inplace=False)
+          (proj): Linear(in_features=120, out_features=120, bias=True)
+        )
+        (mlp): Sequential(
+          (0): Linear(in_features=120, out_features=480, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=480, out_features=120, bias=True)
+          (3): Dropout(p=0.1, inplace=False)
+        )
+      )
+      (1): Block(
+        (ln1): LayerNorm((120,), eps=1e-05, elementwise_affine=True)
+        (ln2): LayerNorm((120,), eps=1e-05, elementwise_affine=True)
+        (attn): SelfAttention(
+          (key): Linear(in_features=120, out_features=120, bias=True)
+          (query): Linear(in_features=120, out_features=120, bias=True)
+          (value): Linear(in_features=120, out_features=120, bias=True)
+          (attn_drop): Dropout(p=0.1, inplace=False)
+          (resid_drop): Dropout(p=0.1, inplace=False)
+          (proj): Linear(in_features=120, out_features=120, bias=True)
+        )
+        (mlp): Sequential(
+          (0): Linear(in_features=120, out_features=480, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=480, out_features=120, bias=True)
+          (3): Dropout(p=0.1, inplace=False)
+        )
+      )
+      (2): Block(
+        (ln1): LayerNorm((120,), eps=1e-05, elementwise_affine=True)
+        (ln2): LayerNorm((120,), eps=1e-05, elementwise_affine=True)
+        (attn): SelfAttention(
+          (key): Linear(in_features=120, out_features=120, bias=True)
+          (query): Linear(in_features=120, out_features=120, bias=True)
+          (value): Linear(in_features=120, out_features=120, bias=True)
+          (attn_drop): Dropout(p=0.1, inplace=False)
+          (resid_drop): Dropout(p=0.1, inplace=False)
+          (proj): Linear(in_features=120, out_features=120, bias=True)
+        )
+        (mlp): Sequential(
+          (0): Linear(in_features=120, out_features=480, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=480, out_features=120, bias=True)
+          (3): Dropout(p=0.1, inplace=False)
+        )
+      )
+      (3): Block(
+        (ln1): LayerNorm((120,), eps=1e-05, elementwise_affine=True)
+        (ln2): LayerNorm((120,), eps=1e-05, elementwise_affine=True)
+        (attn): SelfAttention(
+          (key): Linear(in_features=120, out_features=120, bias=True)
+          (query): Linear(in_features=120, out_features=120, bias=True)
+          (value): Linear(in_features=120, out_features=120, bias=True)
+          (attn_drop): Dropout(p=0.1, inplace=False)
+          (resid_drop): Dropout(p=0.1, inplace=False)
+          (proj): Linear(in_features=120, out_features=120, bias=True)
+        )
+        (mlp): Sequential(
+          (0): Linear(in_features=120, out_features=480, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=480, out_features=120, bias=True)
+          (3): Dropout(p=0.1, inplace=False)
+        )
+      )
+    )
+    (ln_f): LayerNorm((120,), eps=1e-05, elementwise_affine=True)
+  )
+  (transformer3): GPT(
+    (drop): Dropout(p=0.1, inplace=False)
+    (blocks): Sequential(
+      (0): Block(
+        (ln1): LayerNorm((336,), eps=1e-05, elementwise_affine=True)
+        (ln2): LayerNorm((336,), eps=1e-05, elementwise_affine=True)
+        (attn): SelfAttention(
+          (key): Linear(in_features=336, out_features=336, bias=True)
+          (query): Linear(in_features=336, out_features=336, bias=True)
+          (value): Linear(in_features=336, out_features=336, bias=True)
+          (attn_drop): Dropout(p=0.1, inplace=False)
+          (resid_drop): Dropout(p=0.1, inplace=False)
+          (proj): Linear(in_features=336, out_features=336, bias=True)
+        )
+        (mlp): Sequential(
+          (0): Linear(in_features=336, out_features=1344, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=1344, out_features=336, bias=True)
+          (3): Dropout(p=0.1, inplace=False)
+        )
+      )
+      (1): Block(
+        (ln1): LayerNorm((336,), eps=1e-05, elementwise_affine=True)
+        (ln2): LayerNorm((336,), eps=1e-05, elementwise_affine=True)
+        (attn): SelfAttention(
+          (key): Linear(in_features=336, out_features=336, bias=True)
+          (query): Linear(in_features=336, out_features=336, bias=True)
+          (value): Linear(in_features=336, out_features=336, bias=True)
+          (attn_drop): Dropout(p=0.1, inplace=False)
+          (resid_drop): Dropout(p=0.1, inplace=False)
+          (proj): Linear(in_features=336, out_features=336, bias=True)
+        )
+        (mlp): Sequential(
+          (0): Linear(in_features=336, out_features=1344, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=1344, out_features=336, bias=True)
+          (3): Dropout(p=0.1, inplace=False)
+        )
+      )
+      (2): Block(
+        (ln1): LayerNorm((336,), eps=1e-05, elementwise_affine=True)
+        (ln2): LayerNorm((336,), eps=1e-05, elementwise_affine=True)
+        (attn): SelfAttention(
+          (key): Linear(in_features=336, out_features=336, bias=True)
+          (query): Linear(in_features=336, out_features=336, bias=True)
+          (value): Linear(in_features=336, out_features=336, bias=True)
+          (attn_drop): Dropout(p=0.1, inplace=False)
+          (resid_drop): Dropout(p=0.1, inplace=False)
+          (proj): Linear(in_features=336, out_features=336, bias=True)
+        )
+        (mlp): Sequential(
+          (0): Linear(in_features=336, out_features=1344, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=1344, out_features=336, bias=True)
+          (3): Dropout(p=0.1, inplace=False)
+        )
+      )
+      (3): Block(
+        (ln1): LayerNorm((336,), eps=1e-05, elementwise_affine=True)
+        (ln2): LayerNorm((336,), eps=1e-05, elementwise_affine=True)
+        (attn): SelfAttention(
+          (key): Linear(in_features=336, out_features=336, bias=True)
+          (query): Linear(in_features=336, out_features=336, bias=True)
+          (value): Linear(in_features=336, out_features=336, bias=True)
+          (attn_drop): Dropout(p=0.1, inplace=False)
+          (resid_drop): Dropout(p=0.1, inplace=False)
+          (proj): Linear(in_features=336, out_features=336, bias=True)
+        )
+        (mlp): Sequential(
+          (0): Linear(in_features=336, out_features=1344, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=1344, out_features=336, bias=True)
+          (3): Dropout(p=0.1, inplace=False)
+        )
+      )
+    )
+    (ln_f): LayerNorm((336,), eps=1e-05, elementwise_affine=True)
+  )
+  (transformer4): GPT(
+    (drop): Dropout(p=0.1, inplace=False)
+    (blocks): Sequential(
+      (0): Block(
+        (ln1): LayerNorm((888,), eps=1e-05, elementwise_affine=True)
+        (ln2): LayerNorm((888,), eps=1e-05, elementwise_affine=True)
+        (attn): SelfAttention(
+          (key): Linear(in_features=888, out_features=888, bias=True)
+          (query): Linear(in_features=888, out_features=888, bias=True)
+          (value): Linear(in_features=888, out_features=888, bias=True)
+          (attn_drop): Dropout(p=0.1, inplace=False)
+          (resid_drop): Dropout(p=0.1, inplace=False)
+          (proj): Linear(in_features=888, out_features=888, bias=True)
+        )
+        (mlp): Sequential(
+          (0): Linear(in_features=888, out_features=3552, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=3552, out_features=888, bias=True)
+          (3): Dropout(p=0.1, inplace=False)
+        )
+      )
+      (1): Block(
+        (ln1): LayerNorm((888,), eps=1e-05, elementwise_affine=True)
+        (ln2): LayerNorm((888,), eps=1e-05, elementwise_affine=True)
+        (attn): SelfAttention(
+          (key): Linear(in_features=888, out_features=888, bias=True)
+          (query): Linear(in_features=888, out_features=888, bias=True)
+          (value): Linear(in_features=888, out_features=888, bias=True)
+          (attn_drop): Dropout(p=0.1, inplace=False)
+          (resid_drop): Dropout(p=0.1, inplace=False)
+          (proj): Linear(in_features=888, out_features=888, bias=True)
+        )
+        (mlp): Sequential(
+          (0): Linear(in_features=888, out_features=3552, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=3552, out_features=888, bias=True)
+          (3): Dropout(p=0.1, inplace=False)
+        )
+      )
+      (2): Block(
+        (ln1): LayerNorm((888,), eps=1e-05, elementwise_affine=True)
+        (ln2): LayerNorm((888,), eps=1e-05, elementwise_affine=True)
+        (attn): SelfAttention(
+          (key): Linear(in_features=888, out_features=888, bias=True)
+          (query): Linear(in_features=888, out_features=888, bias=True)
+          (value): Linear(in_features=888, out_features=888, bias=True)
+          (attn_drop): Dropout(p=0.1, inplace=False)
+          (resid_drop): Dropout(p=0.1, inplace=False)
+          (proj): Linear(in_features=888, out_features=888, bias=True)
+        )
+        (mlp): Sequential(
+          (0): Linear(in_features=888, out_features=3552, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=3552, out_features=888, bias=True)
+          (3): Dropout(p=0.1, inplace=False)
+        )
+      )
+      (3): Block(
+        (ln1): LayerNorm((888,), eps=1e-05, elementwise_affine=True)
+        (ln2): LayerNorm((888,), eps=1e-05, elementwise_affine=True)
+        (attn): SelfAttention(
+          (key): Linear(in_features=888, out_features=888, bias=True)
+          (query): Linear(in_features=888, out_features=888, bias=True)
+          (value): Linear(in_features=888, out_features=888, bias=True)
+          (attn_drop): Dropout(p=0.1, inplace=False)
+          (resid_drop): Dropout(p=0.1, inplace=False)
+          (proj): Linear(in_features=888, out_features=888, bias=True)
+        )
+        (mlp): Sequential(
+          (0): Linear(in_features=888, out_features=3552, bias=True)
+          (1): ReLU(inplace=True)
+          (2): Linear(in_features=3552, out_features=888, bias=True)
+          (3): Dropout(p=0.1, inplace=False)
+        )
+      )
+    )
+    (ln_f): LayerNorm((888,), eps=1e-05, elementwise_affine=True)
+  )
+  (change_channel_conv_image): Sequential()
+  (change_channel_conv_lidar): Sequential()
+  (relu): ReLU(inplace=True)
+  (upsample): Upsample(scale_factor=2.0, mode=bilinear)
+  (up_conv5): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+  (up_conv4): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+  (up_conv3): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+  (c5_conv): Conv2d(512, 64, kernel_size=(1, 1), stride=(1, 1))
+)
