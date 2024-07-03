@@ -1,0 +1,216 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>alg.epiga.epiga &#8212; epiGA 1.0 documentation</title>
+    <link rel="stylesheet" href="../../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epiGA 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for alg.epiga.epiga</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># file  :  epiga.py</span>
+<span class="c1"># author:  Daniel H. Stolfi</span>
+<span class="c1"># date  :  2019-08-15</span>
+<span class="c1">#</span>
+<span class="c1"># Daniel H. Stolfi and Enrique Alba. Epigenetic algorithms: A New way of building GAs based on epigenetics.</span>
+<span class="c1"># In: Information Sciences, vol. 424, Supplement C, pp. 250–272, 2018.</span>
+<span class="c1"># doi&gt; 10.1016/j.ins.2017.10.005</span>
+
+<span class="kn">from</span> <span class="nn">.epigeneticpopulation</span> <span class="k">import</span> <span class="n">EpigeneticPopulation</span>
+<span class="kn">from</span> <span class="nn">.operators.nucleosomegenerator</span> <span class="k">import</span> <span class="n">NucleosomeGenerator</span>
+<span class="kn">from</span> <span class="nn">.operators.selectionoperator</span> <span class="k">import</span> <span class="n">SelectionOperator</span>
+<span class="kn">from</span> <span class="nn">.operators.reproductionoperator</span> <span class="k">import</span> <span class="n">ReproductionOperator</span>
+<span class="kn">from</span> <span class="nn">.operators.epigeneticoperator</span> <span class="k">import</span> <span class="n">EpigeneticOperator</span>
+<span class="kn">from</span> <span class="nn">.operators.replacementoperator</span> <span class="k">import</span> <span class="n">ReplacementOperator</span>
+<span class="kn">from</span> <span class="nn">.problems.problem</span> <span class="k">import</span> <span class="n">Problem</span>
+
+
+<div class="viewcode-block" id="EpiGA"><a class="viewcode-back" href="../../../index.html#alg.epiga.epiga.EpiGA">[docs]</a><span class="k">class</span> <span class="nc">EpiGA</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;epiGenetic Algorithm.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">problem</span><span class="p">,</span> <span class="n">n_individuals</span><span class="p">,</span> <span class="n">n_cells</span><span class="p">,</span> <span class="n">nucleosomes</span><span class="p">,</span> <span class="n">selection</span><span class="p">,</span> <span class="n">reproduction</span><span class="p">,</span> <span class="n">epigenetic</span><span class="p">,</span> <span class="n">replacement</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor.</span>
+
+<span class="sd">        :param Problem problem: the problem.</span>
+<span class="sd">        :param int n_individuals: the number of individuals.</span>
+<span class="sd">        :param int n_cells: the number of cells.</span>
+<span class="sd">        :param NucleosomeGenerator nucleosomes: the nucleosome generator.</span>
+<span class="sd">        :param SelectionOperator selection: the selection operator.</span>
+<span class="sd">        :param ReproductionOperator reproduction: the reproduction operator.</span>
+<span class="sd">        :param EpigeneticOperator epigenetic: the epigenetic operator.</span>
+<span class="sd">        :param ReplacementOperator replacement: the replacement operator.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__problem</span> <span class="o">=</span> <span class="n">problem</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__n_individuals</span> <span class="o">=</span> <span class="n">n_individuals</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__n_cells</span> <span class="o">=</span> <span class="n">n_cells</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__nucleosomes</span> <span class="o">=</span> <span class="n">nucleosomes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__selection</span> <span class="o">=</span> <span class="n">selection</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__reproduction</span> <span class="o">=</span> <span class="n">reproduction</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__epigenetic</span> <span class="o">=</span> <span class="n">epigenetic</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__replacement</span> <span class="o">=</span> <span class="n">replacement</span>
+
+<div class="viewcode-block" id="EpiGA.run"><a class="viewcode-back" href="../../../index.html#alg.epiga.epiga.EpiGA.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_evaluations</span><span class="p">,</span> <span class="n">verbosity</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">solution_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">stat_file</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Begins the execution and returns the best fitness.</span>
+
+<span class="sd">        :param int n_evaluations: the maximum number of evaluations.</span>
+<span class="sd">        :param int verbosity: the verbosity level [0 -- 4].</span>
+<span class="sd">        :param str solution_file: the solution file.</span>
+<span class="sd">        :param str stat_file: the stats file (convergence data).</span>
+<span class="sd">        :return: the best fitness.</span>
+<span class="sd">        :rtype: float</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">f_stat</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">stat_file</span><span class="p">:</span>
+            <span class="n">f_stat</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">stat_file</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">verbosity</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__problem</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">()</span>
+
+        <span class="n">pop</span> <span class="o">=</span> <span class="n">EpigeneticPopulation</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__problem</span><span class="p">)</span>
+        <span class="n">pop</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__n_individuals</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__n_cells</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">verbosity</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__debug</span><span class="p">(</span><span class="s2">&quot;Initialization&quot;</span><span class="p">,</span> <span class="n">pop</span><span class="p">)</span>
+
+        <span class="n">gen</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">ev</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__problem</span><span class="o">.</span><span class="n">evaluations</span>
+        <span class="k">while</span> <span class="n">ev</span> <span class="o">&lt;=</span> <span class="n">n_evaluations</span><span class="p">:</span>
+
+            <span class="k">if</span> <span class="n">verbosity</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__debug</span><span class="p">(</span><span class="s2">&quot;New generation&quot;</span><span class="p">,</span> <span class="n">pop</span><span class="p">)</span>
+
+            <span class="n">temp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__selection</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">pop</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__nucleosomes</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">verbosity</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__debug</span><span class="p">(</span><span class="s2">&quot;Selection and Nucleosomes&quot;</span><span class="p">,</span> <span class="n">temp</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">__reproduction</span><span class="o">.</span><span class="n">reproduction</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">verbosity</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__debug</span><span class="p">(</span><span class="s2">&quot;Reproduction&quot;</span><span class="p">,</span> <span class="n">temp</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">__epigenetic</span><span class="o">.</span><span class="n">methylate</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+            <span class="n">temp</span><span class="o">.</span><span class="n">evaluate</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">verbosity</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__debug</span><span class="p">(</span><span class="s2">&quot;Methylation&quot;</span><span class="p">,</span> <span class="n">temp</span><span class="p">)</span>
+
+            <span class="n">pop</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__replacement</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="n">pop</span><span class="p">)</span>
+            <span class="n">ev</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__problem</span><span class="o">.</span><span class="n">evaluations</span>
+
+            <span class="k">if</span> <span class="n">verbosity</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__debug</span><span class="p">(</span><span class="s2">&quot;Evaluation and Replacement&quot;</span><span class="p">,</span> <span class="n">pop</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">verbosity</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">f_stat</span><span class="p">:</span>
+                <span class="n">avg</span><span class="p">,</span> <span class="n">best</span> <span class="o">=</span> <span class="n">pop</span><span class="o">.</span><span class="n">metrics</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">verbosity</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Generations: </span><span class="si">{:6d}</span><span class="s2">  Evaluations: </span><span class="si">{:6d}</span><span class="s2">  Average Fitness: </span><span class="si">{:12.3f}</span><span class="s2">  Best Fitness: </span><span class="si">{:12.3f}</span><span class="s2">&quot;</span><span class="o">.</span>
+                          <span class="nb">format</span><span class="p">(</span><span class="n">gen</span><span class="p">,</span> <span class="n">ev</span><span class="p">,</span> <span class="n">avg</span><span class="p">,</span> <span class="n">best</span><span class="p">))</span>
+                <span class="k">if</span> <span class="n">f_stat</span><span class="p">:</span>
+                    <span class="n">f_stat</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="se">\t</span><span class="si">{}</span><span class="se">\t</span><span class="si">{}</span><span class="se">\t</span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">gen</span><span class="p">,</span> <span class="n">ev</span><span class="p">,</span> <span class="n">avg</span><span class="p">,</span> <span class="n">best</span><span class="p">))</span>
+
+            <span class="n">gen</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="n">best_cell</span> <span class="o">=</span> <span class="n">pop</span><span class="o">.</span><span class="n">best_individual</span><span class="p">()</span><span class="o">.</span><span class="n">get_best_cell</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">verbosity</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">best_cell</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">f_stat</span><span class="p">:</span>
+            <span class="n">f_stat</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">solution_file</span><span class="p">:</span>
+            <span class="n">f_sol</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">solution_file</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">best_cell</span><span class="o">.</span><span class="n">solution</span><span class="p">:</span>
+                <span class="n">f_sol</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+                <span class="n">f_sol</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+            <span class="n">f_sol</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">f_sol</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">pop</span><span class="o">.</span><span class="n">best_individual</span><span class="p">()</span><span class="o">.</span><span class="n">get_best_cell</span><span class="p">()</span><span class="o">.</span><span class="n">fitness</span></div>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">__debug</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">pop</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">pop</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epiGA 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Daniel H. Stolfi.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
+    </div>
+  </body>
+</html>

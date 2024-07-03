@@ -1,0 +1,1408 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>The epiGenetic Algorithm &#8212; epiGA 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">epiGA 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="the-epigenetic-algorithm">
+<h1>The epiGenetic Algorithm<a class="headerlink" href="#the-epigenetic-algorithm" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<span class="target" id="module-alg.epiga"></span><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">author:</th><td class="field-body">Daniel H. Stolfi</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-default"><div class="highlight"><pre><span></span>Daniel H. Stolfi and Enrique Alba. Epigenetic algorithms: A New way of building GAs based on epigenetics.
+In: Information Sciences, vol. 424, Supplement C, pp. 250–272, 2018.
+doi&gt; 10.1016/j.ins.2017.10.005
+</pre></div>
+</div>
+<p>epiGA Package.</p>
+<div class="section" id="module-alg.epiga.epiga">
+<span id="epiga"></span><h2>epiGA<a class="headerlink" href="#module-alg.epiga.epiga" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="alg.epiga.epiga.EpiGA">
+<em class="property">class </em><code class="descclassname">alg.epiga.epiga.</code><code class="descname">EpiGA</code><span class="sig-paren">(</span><em>problem</em>, <em>n_individuals</em>, <em>n_cells</em>, <em>nucleosomes</em>, <em>selection</em>, <em>reproduction</em>, <em>epigenetic</em>, <em>replacement</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/epiga.html#EpiGA"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.epiga.EpiGA" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>epiGenetic Algorithm.</p>
+<p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>problem</strong> (<a class="reference internal" href="#alg.epiga.problems.problem.Problem" title="alg.epiga.problems.problem.Problem"><em>Problem</em></a>) – the problem.</li>
+<li><strong>n_individuals</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – the number of individuals.</li>
+<li><strong>n_cells</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – the number of cells.</li>
+<li><strong>nucleosomes</strong> (<a class="reference internal" href="#alg.epiga.operators.nucleosomegenerator.NucleosomeGenerator" title="alg.epiga.operators.nucleosomegenerator.NucleosomeGenerator"><em>NucleosomeGenerator</em></a>) – the nucleosome generator.</li>
+<li><strong>selection</strong> (<a class="reference internal" href="#alg.epiga.operators.selectionoperator.SelectionOperator" title="alg.epiga.operators.selectionoperator.SelectionOperator"><em>SelectionOperator</em></a>) – the selection operator.</li>
+<li><strong>reproduction</strong> (<a class="reference internal" href="#alg.epiga.operators.reproductionoperator.ReproductionOperator" title="alg.epiga.operators.reproductionoperator.ReproductionOperator"><em>ReproductionOperator</em></a>) – the reproduction operator.</li>
+<li><strong>epigenetic</strong> (<a class="reference internal" href="#alg.epiga.operators.epigeneticoperator.EpigeneticOperator" title="alg.epiga.operators.epigeneticoperator.EpigeneticOperator"><em>EpigeneticOperator</em></a>) – the epigenetic operator.</li>
+<li><strong>replacement</strong> (<a class="reference internal" href="#alg.epiga.operators.replacementoperator.ReplacementOperator" title="alg.epiga.operators.replacementoperator.ReplacementOperator"><em>ReplacementOperator</em></a>) – the replacement operator.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="alg.epiga.epiga.EpiGA.run">
+<code class="descname">run</code><span class="sig-paren">(</span><em>n_evaluations</em>, <em>verbosity=0</em>, <em>solution_file=None</em>, <em>stat_file=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/epiga.html#EpiGA.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.epiga.EpiGA.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Begins the execution and returns the best fitness.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>n_evaluations</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – the maximum number of evaluations.</li>
+<li><strong>verbosity</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – the verbosity level [0 – 4].</li>
+<li><strong>solution_file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – the solution file.</li>
+<li><strong>stat_file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – the stats file (convergence data).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the best fitness.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-alg.epiga.epigeneticpopulation">
+<span id="epigenetic-population"></span><h2>epiGenetic Population<a class="headerlink" href="#module-alg.epiga.epigeneticpopulation" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="alg.epiga.epigeneticpopulation.EpigeneticPopulation">
+<em class="property">class </em><code class="descclassname">alg.epiga.epigeneticpopulation.</code><code class="descname">EpigeneticPopulation</code><span class="sig-paren">(</span><em>problem</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/epigeneticpopulation.html#EpigeneticPopulation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.epigeneticpopulation.EpigeneticPopulation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>Epigenetic Population.</p>
+<p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>problem</strong> (<a class="reference internal" href="#alg.epiga.problems.problem.Problem" title="alg.epiga.problems.problem.Problem"><em>Problem</em></a>) – the problem.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="alg.epiga.epigeneticpopulation.EpigeneticPopulation.generate">
+<code class="descname">generate</code><span class="sig-paren">(</span><em>n_individuals</em>, <em>n_cells</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/epigeneticpopulation.html#EpigeneticPopulation.generate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.epigeneticpopulation.EpigeneticPopulation.generate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fills the population.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>n_individuals</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – the number of EpigeneticIndividuals.</li>
+<li><strong>n_cells</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – the number of EpigeneticCells.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.7)">None</a></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#alg.epiga.epigeneticexception.EpigeneticException" title="alg.epiga.epigeneticexception.EpigeneticException"><strong>EpigeneticException</strong></a> – if params are not greater than zero.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="alg.epiga.epigeneticpopulation.EpigeneticPopulation.evaluate">
+<code class="descname">evaluate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/epigeneticpopulation.html#EpigeneticPopulation.evaluate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.epigeneticpopulation.EpigeneticPopulation.evaluate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates the EpigeneticPopulation.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="alg.epiga.epigeneticpopulation.EpigeneticPopulation.get">
+<code class="descname">get</code><span class="sig-paren">(</span><em>pos</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/epigeneticpopulation.html#EpigeneticPopulation.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.epigeneticpopulation.EpigeneticPopulation.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the EpigeneticIndividual in the position.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pos</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – the position [0 – size-1]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the EpigeneticIndividual in the position.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#alg.epiga.epigeneticindividual.EpigeneticIndividual" title="alg.epiga.epigeneticindividual.EpigeneticIndividual">EpigeneticIndividual</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="alg.epiga.epigeneticpopulation.EpigeneticPopulation.add">
+<code class="descname">add</code><span class="sig-paren">(</span><em>individual</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/epigeneticpopulation.html#EpigeneticPopulation.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.epigeneticpopulation.EpigeneticPopulation.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds the EpigeneticIndividual to the position and returns the EpigeneticPopulation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>individual</strong> (<a class="reference internal" href="#alg.epiga.epigeneticindividual.EpigeneticIndividual" title="alg.epiga.epigeneticindividual.EpigeneticIndividual"><em>EpigeneticIndividual</em></a>) – the individual.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the resulting EpigeneticPopulation.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#alg.epiga.epigeneticpopulation.EpigeneticPopulation" title="alg.epiga.epigeneticpopulation.EpigeneticPopulation">EpigeneticPopulation</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="alg.epiga.epigeneticpopulation.EpigeneticPopulation.metrics">
+<code class="descname">metrics</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/epigeneticpopulation.html#EpigeneticPopulation.metrics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.epigeneticpopulation.EpigeneticPopulation.metrics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the mean and best fitness of the EpigeneticPopulation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the mean and best fitness of the EpigeneticPopulation.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">(<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a>,<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a>)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="alg.epiga.epigeneticpopulation.EpigeneticPopulation.best_individual">
+<code class="descname">best_individual</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/epigeneticpopulation.html#EpigeneticPopulation.best_individual"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.epigeneticpopulation.EpigeneticPopulation.best_individual" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the best EpigeneticIndividual in the EpigeneticPopulation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the best EpigeneticIndividual in the EpigeneticPopulation.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#alg.epiga.epigeneticindividual.EpigeneticIndividual" title="alg.epiga.epigeneticindividual.EpigeneticIndividual">EpigeneticIndividual</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="alg.epiga.epigeneticpopulation.EpigeneticPopulation.problem">
+<code class="descname">problem</code><a class="headerlink" href="#alg.epiga.epigeneticpopulation.EpigeneticPopulation.problem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the Problem.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the problem.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#alg.epiga.problems.problem.Problem" title="alg.epiga.problems.problem.Problem">Problem</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="alg.epiga.epigeneticpopulation.EpigeneticPopulation.size">
+<code class="descname">size</code><a class="headerlink" href="#alg.epiga.epigeneticpopulation.EpigeneticPopulation.size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the number of EpigeneticIndividuals in the EpigeneticPopulation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the number of EpigeneticIndividuals in the EpigeneticPopulation.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)">int</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="alg.epiga.epigeneticpopulation.EpigeneticPopulation.check">
+<code class="descname">check</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/epigeneticpopulation.html#EpigeneticPopulation.check"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.epigeneticpopulation.EpigeneticPopulation.check" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks the EpigeneticPopulation using <strong>assert</strong>.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-alg.epiga.epigeneticindividual">
+<span id="epigenetic-individual"></span><h2>epiGenetic Individual<a class="headerlink" href="#module-alg.epiga.epigeneticindividual" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="alg.epiga.epigeneticindividual.EpigeneticIndividual">
+<em class="property">class </em><code class="descclassname">alg.epiga.epigeneticindividual.</code><code class="descname">EpigeneticIndividual</code><span class="sig-paren">(</span><em>problem</em>, <em>n_cells</em>, <em>cells=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/epigeneticindividual.html#EpigeneticIndividual"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.epigeneticindividual.EpigeneticIndividual" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>Epigenetic Individual.</p>
+<p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>problem</strong> (<a class="reference internal" href="#alg.epiga.problems.problem.Problem" title="alg.epiga.problems.problem.Problem"><em>Problem</em></a>) – the problem.</li>
+<li><strong>n_cells</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – the number of cells</li>
+<li><strong>cells</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><a class="reference internal" href="#alg.epiga.epigeneticcell.EpigeneticCell" title="alg.epiga.epigeneticcell.EpigeneticCell"><em>EpigeneticCell</em></a><em>]</em>) – an optional list of EpigeneticCells of size n_cells.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="alg.epiga.epigeneticindividual.EpigeneticIndividual.duplicate">
+<code class="descname">duplicate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/epigeneticindividual.html#EpigeneticIndividual.duplicate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.epigeneticindividual.EpigeneticIndividual.duplicate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Duplicates the EpigeneticIndividual.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">a copy of the EpigeneticIndividual.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#alg.epiga.epigeneticindividual.EpigeneticIndividual" title="alg.epiga.epigeneticindividual.EpigeneticIndividual">EpigeneticIndividual</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="alg.epiga.epigeneticindividual.EpigeneticIndividual.replicate">
+<code class="descname">replicate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/epigeneticindividual.html#EpigeneticIndividual.replicate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.epigeneticindividual.EpigeneticIndividual.replicate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Duplicates the EpigeneticIndividual and set all its cells as a copy of the best EpigeneticCell.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">a copy of the EpigeneticIndividual.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#alg.epiga.epigeneticindividual.EpigeneticIndividual" title="alg.epiga.epigeneticindividual.EpigeneticIndividual">EpigeneticIndividual</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="alg.epiga.epigeneticindividual.EpigeneticIndividual.evaluate">
+<code class="descname">evaluate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/epigeneticindividual.html#EpigeneticIndividual.evaluate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.epigeneticindividual.EpigeneticIndividual.evaluate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates the EpigeneticIndividual by evaluating of the EpigeneticCells in it.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="alg.epiga.epigeneticindividual.EpigeneticIndividual.get_best_cell">
+<code class="descname">get_best_cell</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/epigeneticindividual.html#EpigeneticIndividual.get_best_cell"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.epigeneticindividual.EpigeneticIndividual.get_best_cell" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the best EpigeneticCell in the EpigeneticIndividual.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the best EpigeneticCell in the EpigeneticIndividual.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#alg.epiga.epigeneticcell.EpigeneticCell" title="alg.epiga.epigeneticcell.EpigeneticCell">EpigeneticCell</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="alg.epiga.epigeneticindividual.EpigeneticIndividual.get_best_fitness">
+<code class="descname">get_best_fitness</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/epigeneticindividual.html#EpigeneticIndividual.get_best_fitness"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.epigeneticindividual.EpigeneticIndividual.get_best_fitness" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the fitness of the best EpigeneticCell in the EpigeneticIndividual.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the fitness of the best EpigeneticCell in the EpigeneticIndividual.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="alg.epiga.epigeneticindividual.EpigeneticIndividual.is_better">
+<code class="descname">is_better</code><span class="sig-paren">(</span><em>individual</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/epigeneticindividual.html#EpigeneticIndividual.is_better"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.epigeneticindividual.EpigeneticIndividual.is_better" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <strong>True</strong> if the EpigeneticIndividual is better than <code class="docutils literal"><span class="pre">individual</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>individual</strong> (<a class="reference internal" href="#alg.epiga.epigeneticindividual.EpigeneticIndividual" title="alg.epiga.epigeneticindividual.EpigeneticIndividual"><em>EpigeneticIndividual</em></a>) – the individual.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">True if the EpigeneticIndividual is better than individual.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)">bool</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="alg.epiga.epigeneticindividual.EpigeneticIndividual.cells">
+<code class="descname">cells</code><a class="headerlink" href="#alg.epiga.epigeneticindividual.EpigeneticIndividual.cells" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the EpigeneticCells in the EpigeneticIndividual.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the EpigeneticCells in the EpigeneticIndividual.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)">list</a>[<a class="reference internal" href="#alg.epiga.epigeneticcell.EpigeneticCell" title="alg.epiga.epigeneticcell.EpigeneticCell">EpigeneticCell</a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="alg.epiga.epigeneticindividual.EpigeneticIndividual.problem">
+<code class="descname">problem</code><a class="headerlink" href="#alg.epiga.epigeneticindividual.EpigeneticIndividual.problem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the Problem.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the problem.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#alg.epiga.problems.problem.Problem" title="alg.epiga.problems.problem.Problem">Problem</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-alg.epiga.epigeneticcell">
+<span id="epigenetic-cell"></span><h2>epiGenetic Cell<a class="headerlink" href="#module-alg.epiga.epigeneticcell" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="alg.epiga.epigeneticcell.EpigeneticCell">
+<em class="property">class </em><code class="descclassname">alg.epiga.epigeneticcell.</code><code class="descname">EpigeneticCell</code><span class="sig-paren">(</span><em>problem</em>, <em>nucleosomes=None</em>, <em>solution=None</em>, <em>fitness=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/epigeneticcell.html#EpigeneticCell"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.epigeneticcell.EpigeneticCell" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>Epigenetic Cell.</p>
+<p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>problem</strong> (<a class="reference internal" href="#alg.epiga.problems.problem.Problem" title="alg.epiga.problems.problem.Problem"><em>Problem</em></a>) – the problem.</li>
+<li><strong>nucleosomes</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em>]</em>) – the nucleosome vector.</li>
+<li><strong>solution</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><em>Any</em><em>]</em>) – the solution vector.</li>
+<li><strong>fitness</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – the fitness value.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="alg.epiga.epigeneticcell.EpigeneticCell.duplicate">
+<code class="descname">duplicate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/epigeneticcell.html#EpigeneticCell.duplicate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.epigeneticcell.EpigeneticCell.duplicate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Duplicates the EpigeneticCell.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">a copy of the EpigeneticCell.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#alg.epiga.epigeneticcell.EpigeneticCell" title="alg.epiga.epigeneticcell.EpigeneticCell">EpigeneticCell</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="alg.epiga.epigeneticcell.EpigeneticCell.evaluate">
+<code class="descname">evaluate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/epigeneticcell.html#EpigeneticCell.evaluate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.epigeneticcell.EpigeneticCell.evaluate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Repairs and Evaluates the EpigeneticCell and update its fitness.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="alg.epiga.epigeneticcell.EpigeneticCell.is_better">
+<code class="descname">is_better</code><span class="sig-paren">(</span><em>cell</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/epigeneticcell.html#EpigeneticCell.is_better"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.epigeneticcell.EpigeneticCell.is_better" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <strong>True</strong> if the EpigeneticCell is better than <code class="docutils literal"><span class="pre">cell</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cell</strong> (<a class="reference internal" href="#alg.epiga.epigeneticcell.EpigeneticCell" title="alg.epiga.epigeneticcell.EpigeneticCell"><em>EpigeneticCell</em></a>) – the EpigeneticCell.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">True if the EpigeneticCell is better than cell.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#alg.epiga.epigeneticcell.EpigeneticCell" title="alg.epiga.epigeneticcell.EpigeneticCell">EpigeneticCell</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="alg.epiga.epigeneticcell.EpigeneticCell.generate_nucleosomes">
+<code class="descname">generate_nucleosomes</code><span class="sig-paren">(</span><em>p_n</em>, <em>radius</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/epigeneticcell.html#EpigeneticCell.generate_nucleosomes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.epigeneticcell.EpigeneticCell.generate_nucleosomes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates and updates the nucleosomes in the cell.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>p_n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – the nucleosome probability.</li>
+<li><strong>radius</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – the nucleosome radius.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.7)">None</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="alg.epiga.epigeneticcell.EpigeneticCell.fitness">
+<code class="descname">fitness</code><a class="headerlink" href="#alg.epiga.epigeneticcell.EpigeneticCell.fitness" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the fitness value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the fitness value.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="alg.epiga.epigeneticcell.EpigeneticCell.solution">
+<code class="descname">solution</code><a class="headerlink" href="#alg.epiga.epigeneticcell.EpigeneticCell.solution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the solution vector.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the solution vector.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)">list</a>[Any]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="alg.epiga.epigeneticcell.EpigeneticCell.nucleosomes">
+<code class="descname">nucleosomes</code><a class="headerlink" href="#alg.epiga.epigeneticcell.EpigeneticCell.nucleosomes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the nucleosome vector.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the nucleosome vector.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)">list</a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)">bool</a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="alg.epiga.epigeneticcell.EpigeneticCell.problem">
+<code class="descname">problem</code><a class="headerlink" href="#alg.epiga.epigeneticcell.EpigeneticCell.problem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the Problem.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the problem.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#alg.epiga.problems.problem.Problem" title="alg.epiga.problems.problem.Problem">Problem</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-alg.epiga.epigeneticexception">
+<span id="epigenetic-exception"></span><h2>epiGenetic Exception<a class="headerlink" href="#module-alg.epiga.epigeneticexception" title="Permalink to this headline">¶</a></h2>
+<dl class="exception">
+<dt id="alg.epiga.epigeneticexception.EpigeneticException">
+<em class="property">exception </em><code class="descclassname">alg.epiga.epigeneticexception.</code><code class="descname">EpigeneticException</code><span class="sig-paren">(</span><em>*args: object</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/alg/epiga/epigeneticexception.html#EpigeneticException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.epigeneticexception.EpigeneticException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.7)"><code class="xref py py-class docutils literal"><span class="pre">Exception</span></code></a></p>
+<p>The Epigenetic Exception Class.</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="module-alg.epiga.operators">
+<span id="operators"></span><h1>Operators<a class="headerlink" href="#module-alg.epiga.operators" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">author:</th><td class="field-body">Daniel H. Stolfi</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-default"><div class="highlight"><pre><span></span>Daniel H. Stolfi and Enrique Alba. Epigenetic algorithms: A New way of building GAs based on epigenetics.
+In: Information Sciences, vol. 424, Supplement C, pp. 250–272, 2018.
+doi&gt; 10.1016/j.ins.2017.10.005
+</pre></div>
+</div>
+<p>Operators package.</p>
+<div class="section" id="module-alg.epiga.operators.selectionoperator">
+<span id="selection-operator"></span><h2>Selection Operator<a class="headerlink" href="#module-alg.epiga.operators.selectionoperator" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="alg.epiga.operators.selectionoperator.SelectionOperator">
+<em class="property">class </em><code class="descclassname">alg.epiga.operators.selectionoperator.</code><code class="descname">SelectionOperator</code><a class="reference internal" href="_modules/alg/epiga/operators/selectionoperator.html#SelectionOperator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.operators.selectionoperator.SelectionOperator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.7)"><code class="xref py py-class docutils literal"><span class="pre">abc.ABC</span></code></a></p>
+<p>Selection Operator.</p>
+<dl class="method">
+<dt id="alg.epiga.operators.selectionoperator.SelectionOperator.select">
+<code class="descname">select</code><span class="sig-paren">(</span><em>pop</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/operators/selectionoperator.html#SelectionOperator.select"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.operators.selectionoperator.SelectionOperator.select" title="Permalink to this definition">¶</a></dt>
+<dd><p>Selects a new set of EpigeneticIndividuals.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pop</strong> (<a class="reference internal" href="#alg.epiga.epigeneticpopulation.EpigeneticPopulation" title="alg.epiga.epigeneticpopulation.EpigeneticPopulation"><em>EpigeneticPopulation</em></a>) – the EpigeneticPopulation.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="module-alg.epiga.operators.binarytournamentselection">
+<span id="binary-tournament-selection"></span><h3>Binary Tournament Selection<a class="headerlink" href="#module-alg.epiga.operators.binarytournamentselection" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="alg.epiga.operators.binarytournamentselection.BinaryTournamentSelection">
+<em class="property">class </em><code class="descclassname">alg.epiga.operators.binarytournamentselection.</code><code class="descname">BinaryTournamentSelection</code><a class="reference internal" href="_modules/alg/epiga/operators/binarytournamentselection.html#BinaryTournamentSelection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.operators.binarytournamentselection.BinaryTournamentSelection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#alg.epiga.operators.selectionoperator.SelectionOperator" title="alg.epiga.operators.selectionoperator.SelectionOperator"><code class="xref py py-class docutils literal"><span class="pre">alg.epiga.operators.selectionoperator.SelectionOperator</span></code></a></p>
+<p>Binary Tournament Selection Operator.</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="module-alg.epiga.operators.reproductionoperator">
+<span id="reproduction-operator"></span><h2>Reproduction Operator<a class="headerlink" href="#module-alg.epiga.operators.reproductionoperator" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="alg.epiga.operators.reproductionoperator.ReproductionOperator">
+<em class="property">class </em><code class="descclassname">alg.epiga.operators.reproductionoperator.</code><code class="descname">ReproductionOperator</code><a class="reference internal" href="_modules/alg/epiga/operators/reproductionoperator.html#ReproductionOperator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.operators.reproductionoperator.ReproductionOperator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.7)"><code class="xref py py-class docutils literal"><span class="pre">abc.ABC</span></code></a></p>
+<p>Reproduction Epigenetic Operator.</p>
+<dl class="method">
+<dt id="alg.epiga.operators.reproductionoperator.ReproductionOperator.reproduction">
+<code class="descname">reproduction</code><span class="sig-paren">(</span><em>pop</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/operators/reproductionoperator.html#ReproductionOperator.reproduction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.operators.reproductionoperator.ReproductionOperator.reproduction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Crossover between EpigeneticIndividuals in the EpigeneticPopulation <code class="docutils literal"><span class="pre">pop</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pop</strong> (<a class="reference internal" href="#alg.epiga.epigeneticpopulation.EpigeneticPopulation" title="alg.epiga.epigeneticpopulation.EpigeneticPopulation"><em>EpigeneticPopulation</em></a>) – the EpigeneticPopulation.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="module-alg.epiga.operators.nucleosomebasedreproduction">
+<span id="nuclesome-based-reproduction"></span><h3>Nuclesome Based Reproduction<a class="headerlink" href="#module-alg.epiga.operators.nucleosomebasedreproduction" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="alg.epiga.operators.nucleosomebasedreproduction.NucleosomeBasedReproduction">
+<em class="property">class </em><code class="descclassname">alg.epiga.operators.nucleosomebasedreproduction.</code><code class="descname">NucleosomeBasedReproduction</code><a class="reference internal" href="_modules/alg/epiga/operators/nucleosomebasedreproduction.html#NucleosomeBasedReproduction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.operators.nucleosomebasedreproduction.NucleosomeBasedReproduction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#alg.epiga.operators.reproductionoperator.ReproductionOperator" title="alg.epiga.operators.reproductionoperator.ReproductionOperator"><code class="xref py py-class docutils literal"><span class="pre">alg.epiga.operators.reproductionoperator.ReproductionOperator</span></code></a></p>
+<p>NucleosomeBasedReproduction Operator.</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="module-alg.epiga.operators.epigeneticoperator">
+<span id="epigenetic-operator"></span><h2>epiGenetic Operator<a class="headerlink" href="#module-alg.epiga.operators.epigeneticoperator" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="alg.epiga.operators.epigeneticoperator.EpigeneticOperator">
+<em class="property">class </em><code class="descclassname">alg.epiga.operators.epigeneticoperator.</code><code class="descname">EpigeneticOperator</code><span class="sig-paren">(</span><em>p_e</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/operators/epigeneticoperator.html#EpigeneticOperator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.operators.epigeneticoperator.EpigeneticOperator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.7)"><code class="xref py py-class docutils literal"><span class="pre">abc.ABC</span></code></a></p>
+<p>Epigenetic Operator.</p>
+<p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>p_e</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – the epigenetic probability</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="alg.epiga.operators.epigeneticoperator.EpigeneticOperator.methylate">
+<code class="descname">methylate</code><span class="sig-paren">(</span><em>pop</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/operators/epigeneticoperator.html#EpigeneticOperator.methylate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.operators.epigeneticoperator.EpigeneticOperator.methylate" title="Permalink to this definition">¶</a></dt>
+<dd><p>DNA Methylation of all the EpigeneticCells of all the EpigeneticIndividuals in the EpigeneticPopulation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pop</strong> (<a class="reference internal" href="#alg.epiga.epigeneticpopulation.EpigeneticPopulation" title="alg.epiga.epigeneticpopulation.EpigeneticPopulation"><em>EpigeneticPopulation</em></a>) – the EpigeneticPopulation.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="module-alg.epiga.operators.binarygenesilencing">
+<span id="binary-gene-silencing"></span><h3>Binary Gene Silencing<a class="headerlink" href="#module-alg.epiga.operators.binarygenesilencing" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="alg.epiga.operators.binarygenesilencing.BinaryGeneSilencing">
+<em class="property">class </em><code class="descclassname">alg.epiga.operators.binarygenesilencing.</code><code class="descname">BinaryGeneSilencing</code><span class="sig-paren">(</span><em>p_e</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/operators/binarygenesilencing.html#BinaryGeneSilencing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.operators.binarygenesilencing.BinaryGeneSilencing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#alg.epiga.operators.epigeneticoperator.EpigeneticOperator" title="alg.epiga.operators.epigeneticoperator.EpigeneticOperator"><code class="xref py py-class docutils literal"><span class="pre">alg.epiga.operators.epigeneticoperator.EpigeneticOperator</span></code></a></p>
+<p>Binary Gene Silencing Operator.</p>
+<p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>p_e</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – the epigenetic probability</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-alg.epiga.operators.numericgenesilencing">
+<span id="numeric-gene-silencing"></span><h3>Numeric Gene Silencing<a class="headerlink" href="#module-alg.epiga.operators.numericgenesilencing" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="alg.epiga.operators.numericgenesilencing.NumericGeneSilencing">
+<em class="property">class </em><code class="descclassname">alg.epiga.operators.numericgenesilencing.</code><code class="descname">NumericGeneSilencing</code><span class="sig-paren">(</span><em>p_e</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/operators/numericgenesilencing.html#NumericGeneSilencing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.operators.numericgenesilencing.NumericGeneSilencing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#alg.epiga.operators.epigeneticoperator.EpigeneticOperator" title="alg.epiga.operators.epigeneticoperator.EpigeneticOperator"><code class="xref py py-class docutils literal"><span class="pre">alg.epiga.operators.epigeneticoperator.EpigeneticOperator</span></code></a></p>
+<p>Numeric Gene Silencing Operator.
+Based on Chelouah et al., 2000.</p>
+<p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>p_e</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – the epigenetic probability</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-alg.epiga.operators.permutationgenesilencing">
+<span id="permutation-gene-silencing"></span><h3>Permutation Gene Silencing<a class="headerlink" href="#module-alg.epiga.operators.permutationgenesilencing" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="alg.epiga.operators.permutationgenesilencing.PermutationGeneSilencing">
+<em class="property">class </em><code class="descclassname">alg.epiga.operators.permutationgenesilencing.</code><code class="descname">PermutationGeneSilencing</code><span class="sig-paren">(</span><em>p_e</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/operators/permutationgenesilencing.html#PermutationGeneSilencing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.operators.permutationgenesilencing.PermutationGeneSilencing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#alg.epiga.operators.epigeneticoperator.EpigeneticOperator" title="alg.epiga.operators.epigeneticoperator.EpigeneticOperator"><code class="xref py py-class docutils literal"><span class="pre">alg.epiga.operators.epigeneticoperator.EpigeneticOperator</span></code></a></p>
+<p>Permutation Gene Silencing Operator.</p>
+<p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>p_e</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – the epigenetic probability</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="module-alg.epiga.operators.replacementoperator">
+<span id="replacement-operator"></span><h2>Replacement Operator<a class="headerlink" href="#module-alg.epiga.operators.replacementoperator" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="alg.epiga.operators.replacementoperator.ReplacementOperator">
+<em class="property">class </em><code class="descclassname">alg.epiga.operators.replacementoperator.</code><code class="descname">ReplacementOperator</code><a class="reference internal" href="_modules/alg/epiga/operators/replacementoperator.html#ReplacementOperator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.operators.replacementoperator.ReplacementOperator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.7)"><code class="xref py py-class docutils literal"><span class="pre">abc.ABC</span></code></a></p>
+<p>Replacement Operator.</p>
+<dl class="method">
+<dt id="alg.epiga.operators.replacementoperator.ReplacementOperator.replace">
+<code class="descname">replace</code><span class="sig-paren">(</span><em>pop</em>, <em>temp</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/operators/replacementoperator.html#ReplacementOperator.replace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.operators.replacementoperator.ReplacementOperator.replace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a new EpigeneticPopulation after replacing the EpigeneticIndividuals in the EpigeneticPopulation
+<code class="docutils literal"><span class="pre">pop</span></code> using the EpigeneticIndividuals in <code class="docutils literal"><span class="pre">temp</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pop</strong> (<a class="reference internal" href="#alg.epiga.epigeneticpopulation.EpigeneticPopulation" title="alg.epiga.epigeneticpopulation.EpigeneticPopulation"><em>EpigeneticPopulation</em></a>) – the initial EpigeneticPopulation.</li>
+<li><strong>temp</strong> (<a class="reference internal" href="#alg.epiga.epigeneticpopulation.EpigeneticPopulation" title="alg.epiga.epigeneticpopulation.EpigeneticPopulation"><em>EpigeneticPopulation</em></a>) – the temporal EpigeneticPopulation.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">a new EpigeneticPopulation after replacement.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#alg.epiga.epigeneticpopulation.EpigeneticPopulation" title="alg.epiga.epigeneticpopulation.EpigeneticPopulation">EpigeneticPopulation</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="module-alg.epiga.operators.elitistreplacement">
+<span id="elitist-replacement"></span><h3>Elitist Replacement<a class="headerlink" href="#module-alg.epiga.operators.elitistreplacement" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="alg.epiga.operators.elitistreplacement.ElitistReplacement">
+<em class="property">class </em><code class="descclassname">alg.epiga.operators.elitistreplacement.</code><code class="descname">ElitistReplacement</code><span class="sig-paren">(</span><em>duplicates=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/operators/elitistreplacement.html#ElitistReplacement"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.operators.elitistreplacement.ElitistReplacement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#alg.epiga.operators.replacementoperator.ReplacementOperator" title="alg.epiga.operators.replacementoperator.ReplacementOperator"><code class="xref py py-class docutils literal"><span class="pre">alg.epiga.operators.replacementoperator.ReplacementOperator</span></code></a></p>
+<p>Elitist Replacement Operator.</p>
+<p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>duplicates</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – True (default) to allow repeated EpigeneticIndividuals in the resulting EpigeneticPopulation.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="module-alg.epiga.operators.nucleosomegenerator">
+<span id="nucleosome-generator"></span><h2>Nucleosome Generator<a class="headerlink" href="#module-alg.epiga.operators.nucleosomegenerator" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="alg.epiga.operators.nucleosomegenerator.NucleosomeGenerator">
+<em class="property">class </em><code class="descclassname">alg.epiga.operators.nucleosomegenerator.</code><code class="descname">NucleosomeGenerator</code><span class="sig-paren">(</span><em>p_n</em>, <em>radius</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/operators/nucleosomegenerator.html#NucleosomeGenerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.operators.nucleosomegenerator.NucleosomeGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>Nucleosome Generator.</p>
+<p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>p_n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – the nucleosome probability.</li>
+<li><strong>radius</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – the nucleosome radius.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="alg.epiga.operators.nucleosomegenerator.NucleosomeGenerator.generate">
+<code class="descname">generate</code><span class="sig-paren">(</span><em>pop</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/operators/nucleosomegenerator.html#NucleosomeGenerator.generate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.operators.nucleosomegenerator.NucleosomeGenerator.generate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate and update the nucleosomes in all the EpigeneticCells in all the EpigeneticIndividuals in the
+EpigeneticPopulation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pop</strong> (<a class="reference internal" href="#alg.epiga.epigeneticpopulation.EpigeneticPopulation" title="alg.epiga.epigeneticpopulation.EpigeneticPopulation"><em>EpigeneticPopulation</em></a>) – the EpigeneticPopulation.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="module-alg.epiga.problems">
+<span id="problems"></span><h1>Problems<a class="headerlink" href="#module-alg.epiga.problems" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">author:</th><td class="field-body">Daniel H. Stolfi</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-default"><div class="highlight"><pre><span></span>Daniel H. Stolfi and Enrique Alba. Epigenetic algorithms: A New way of building GAs based on epigenetics.
+In: Information Sciences, vol. 424, Supplement C, pp. 250–272, 2018.
+doi&gt; 10.1016/j.ins.2017.10.005
+</pre></div>
+</div>
+<p>Problems Package.</p>
+<div class="section" id="module-alg.epiga.problems.problem">
+<span id="problem"></span><h2>Problem<a class="headerlink" href="#module-alg.epiga.problems.problem" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="alg.epiga.problems.problem.Problem">
+<em class="property">class </em><code class="descclassname">alg.epiga.problems.problem.</code><code class="descname">Problem</code><span class="sig-paren">(</span><em>name</em>, <em>size</em>, <em>environment</em>, <em>maxmin</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/problems/problem.html#Problem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.problems.problem.Problem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.7)"><code class="xref py py-class docutils literal"><span class="pre">abc.ABC</span></code></a></p>
+<p>Problem.</p>
+<p>Problem Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – the problem name.</li>
+<li><strong>size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – the size of the problem solution.</li>
+<li><strong>environment</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>]</em>) – a probability list corresponding to the epigenetic environment.</li>
+<li><strong>maxmin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – maximization/minimization problem (Problem.MAXIMIZATION or Problem.MINIMIZATION).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#alg.epiga.epigeneticexception.EpigeneticException" title="alg.epiga.epigeneticexception.EpigeneticException"><strong>EpigeneticException</strong></a> – if maxmin is not Problem.MAXIMIZATION or Problem.MINIMIZATION.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="alg.epiga.problems.problem.Problem.compute_fitness">
+<code class="descname">compute_fitness</code><span class="sig-paren">(</span><em>solution</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/problems/problem.html#Problem.compute_fitness"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.problems.problem.Problem.compute_fitness" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the fitness of the solution.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>solution</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><em>Any</em><em>]</em>) – the representation of the solution.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the fitness value.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference internal" href="#alg.epiga.epigeneticexception.EpigeneticException" title="alg.epiga.epigeneticexception.EpigeneticException"><strong>EpigeneticException</strong></a> – if the solution length is wrong.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="alg.epiga.problems.problem.Problem.repair">
+<code class="descname">repair</code><span class="sig-paren">(</span><em>solution</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/problems/problem.html#Problem.repair"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.problems.problem.Problem.repair" title="Permalink to this definition">¶</a></dt>
+<dd><p>Repairs the solution before evaluation if needed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>solution</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><em>Any</em><em>]</em>) – the representation of the solution.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the repaired solution.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)">list</a>[Any]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="alg.epiga.problems.problem.Problem.limits">
+<code class="descname">limits</code><span class="sig-paren">(</span><em>position</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/problems/problem.html#Problem.limits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.problems.problem.Problem.limits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the limits (min, max) of the variable in <code class="docutils literal"><span class="pre">position</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>position</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – the position of the variable in the solution vector.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the limits.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">(Any,Any)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="alg.epiga.problems.problem.Problem.generate_solution">
+<code class="descname">generate_solution</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/problems/problem.html#Problem.generate_solution"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.problems.problem.Problem.generate_solution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a new solution.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">a new solution.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)">list</a>[Any]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="alg.epiga.problems.problem.Problem.compare">
+<code class="descname">compare</code><span class="sig-paren">(</span><em>f1</em>, <em>f2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/problems/problem.html#Problem.compare"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.problems.problem.Problem.compare" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <strong>True</strong> if <em>f1</em> is better than <em>f2</em>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>f1</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – the first fitness value.</li>
+<li><strong>f2</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – the second fitness value.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">True if f1 is better than f2.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)">bool</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="alg.epiga.problems.problem.Problem._get_fitness">
+<code class="descname">_get_fitness</code><span class="sig-paren">(</span><em>solution</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/problems/problem.html#Problem._get_fitness"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.problems.problem.Problem._get_fitness" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the fitness of the solution.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>solution</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><em>Any</em><em>]</em>) – the representation of the solution.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the fitness of the solution.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="alg.epiga.problems.problem.Problem.format_solution">
+<code class="descname">format_solution</code><span class="sig-paren">(</span><em>solution</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/problems/problem.html#Problem.format_solution"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.problems.problem.Problem.format_solution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Formats the solution vector.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>solution</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><em>Any</em><em>]</em>) – the representation of the solution.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the formatted solution vector.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="alg.epiga.problems.problem.Problem.delta">
+<code class="descname">delta</code><span class="sig-paren">(</span><em>position</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/problems/problem.html#Problem.delta"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.problems.problem.Problem.delta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the <em>delta</em> increment when modifying the solution vector.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>position</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – the position of the variable in the solution vector.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the delta increment.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Any</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="alg.epiga.problems.problem.Problem.minimization">
+<code class="descname">minimization</code><a class="headerlink" href="#alg.epiga.problems.problem.Problem.minimization" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <strong>True</strong> if it is a minimization problem.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if it is a minimization problem.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)">bool</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="alg.epiga.problems.problem.Problem.maximization">
+<code class="descname">maximization</code><a class="headerlink" href="#alg.epiga.problems.problem.Problem.maximization" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <strong>True</strong> if it is a maximization problem.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if it is a maximization problem.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)">bool</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="alg.epiga.problems.problem.Problem.evaluations">
+<code class="descname">evaluations</code><a class="headerlink" href="#alg.epiga.problems.problem.Problem.evaluations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the number of evaluations.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the number of evaluations.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)">int</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="alg.epiga.problems.problem.Problem.size">
+<code class="descname">size</code><a class="headerlink" href="#alg.epiga.problems.problem.Problem.size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the problem size.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the problem size.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)">int</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="alg.epiga.problems.problem.Problem.environment">
+<code class="descname">environment</code><a class="headerlink" href="#alg.epiga.problems.problem.Problem.environment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the epigenetic environment.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the epigenetic environment.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)">list</a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)">bool</a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="module-alg.epiga.problems.binaryproblem">
+<span id="binary-problem"></span><h3>Binary Problem<a class="headerlink" href="#module-alg.epiga.problems.binaryproblem" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="alg.epiga.problems.binaryproblem.BinaryProblem">
+<em class="property">class </em><code class="descclassname">alg.epiga.problems.binaryproblem.</code><code class="descname">BinaryProblem</code><span class="sig-paren">(</span><em>name</em>, <em>size</em>, <em>environment</em>, <em>maxmin</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/problems/binaryproblem.html#BinaryProblem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.problems.binaryproblem.BinaryProblem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#alg.epiga.problems.problem.Problem" title="alg.epiga.problems.problem.Problem"><code class="xref py py-class docutils literal"><span class="pre">alg.epiga.problems.problem.Problem</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.7)"><code class="xref py py-class docutils literal"><span class="pre">abc.ABC</span></code></a></p>
+<p>Binary problem.
+Represents problems represented as Binary numbers as KP, MKP, OneMax, etc.</p>
+<p>Problem Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – the problem name.</li>
+<li><strong>size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – the size of the problem solution.</li>
+<li><strong>environment</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>]</em>) – a probability list corresponding to the epigenetic environment.</li>
+<li><strong>maxmin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – maximization/minimization problem (Problem.MAXIMIZATION or Problem.MINIMIZATION).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#alg.epiga.epigeneticexception.EpigeneticException" title="alg.epiga.epigeneticexception.EpigeneticException"><strong>EpigeneticException</strong></a> – if maxmin is not Problem.MAXIMIZATION or Problem.MINIMIZATION.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-alg.epiga.problems.numericproblem">
+<span id="numeric-problem"></span><h3>Numeric Problem<a class="headerlink" href="#module-alg.epiga.problems.numericproblem" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="alg.epiga.problems.numericproblem.NumericProblem">
+<em class="property">class </em><code class="descclassname">alg.epiga.problems.numericproblem.</code><code class="descname">NumericProblem</code><span class="sig-paren">(</span><em>name</em>, <em>size</em>, <em>minv</em>, <em>maxv</em>, <em>environment</em>, <em>maxmin</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/problems/numericproblem.html#NumericProblem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.problems.numericproblem.NumericProblem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#alg.epiga.problems.problem.Problem" title="alg.epiga.problems.problem.Problem"><code class="xref py py-class docutils literal"><span class="pre">alg.epiga.problems.problem.Problem</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.7)"><code class="xref py py-class docutils literal"><span class="pre">abc.ABC</span></code></a></p>
+<p>Represents Numeric problems.
+Its derived classes <a class="reference internal" href="#alg.epiga.problems.integerproblem.IntegerProblem" title="alg.epiga.problems.integerproblem.IntegerProblem"><code class="xref py py-class docutils literal"><span class="pre">IntegerProblem</span></code></a> and <a class="reference internal" href="#alg.epiga.problems.floatproblem.FloatProblem" title="alg.epiga.problems.floatproblem.FloatProblem"><code class="xref py py-class docutils literal"><span class="pre">FloatProblem</span></code></a> implements their respective types.</p>
+<p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – the problem name.</li>
+<li><strong>size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – the number of values in the solution vector.</li>
+<li><strong>minv</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><em>Any</em><em>]</em>) – the lower limit of the variables.</li>
+<li><strong>maxv</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><em>Any</em><em>]</em>) – the upper limit of the variables.</li>
+<li><strong>environment</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>]</em>) – a probability list corresponding to the epigenetic environment.</li>
+<li><strong>maxmin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – maximization/minimization problem (Problem.MAXIMIZATION or Problem.MINIMIZATION).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#alg.epiga.epigeneticexception.EpigeneticException" title="alg.epiga.epigeneticexception.EpigeneticException"><strong>EpigeneticException</strong></a> – if the length of minv or maxv are different from the problem size.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="alg.epiga.problems.numericproblem.NumericProblem.k">
+<code class="descname">k</code><span class="sig-paren">(</span><em>position</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/problems/numericproblem.html#NumericProblem.k"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.problems.numericproblem.NumericProblem.k" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attenuation coefficient of the variable in <code class="docutils literal"><span class="pre">position</span></code> usually depending on the maximum number of evaluations.
+k = 1 corresponds to no attenuation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>position</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – the position of the variable in the solution vector.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the attenuation coefficient.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="alg.epiga.problems.numericproblem.NumericProblem._format">
+<code class="descname">_format</code><span class="sig-paren">(</span><em>position</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/problems/numericproblem.html#NumericProblem._format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.problems.numericproblem.NumericProblem._format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Numeric format pattern for the <code class="docutils literal"><span class="pre">position</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>position</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – the position of the variable in the solution vector.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the format pattern.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="module-alg.epiga.problems.integerproblem">
+<span id="integer-problem"></span><h4>Integer Problem<a class="headerlink" href="#module-alg.epiga.problems.integerproblem" title="Permalink to this headline">¶</a></h4>
+<dl class="class">
+<dt id="alg.epiga.problems.integerproblem.IntegerProblem">
+<em class="property">class </em><code class="descclassname">alg.epiga.problems.integerproblem.</code><code class="descname">IntegerProblem</code><span class="sig-paren">(</span><em>name</em>, <em>size</em>, <em>minv</em>, <em>maxv</em>, <em>environment</em>, <em>maxmin</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/problems/integerproblem.html#IntegerProblem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.problems.integerproblem.IntegerProblem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#alg.epiga.problems.numericproblem.NumericProblem" title="alg.epiga.problems.numericproblem.NumericProblem"><code class="xref py py-class docutils literal"><span class="pre">alg.epiga.problems.numericproblem.NumericProblem</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.7)"><code class="xref py py-class docutils literal"><span class="pre">abc.ABC</span></code></a></p>
+<p>Integer problem.
+Represents problems represented as Integer numbers.</p>
+<p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – the problem name.</li>
+<li><strong>size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – the number of values in the solution vector.</li>
+<li><strong>minv</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><em>Any</em><em>]</em>) – the lower limit of the variables.</li>
+<li><strong>maxv</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><em>Any</em><em>]</em>) – the upper limit of the variables.</li>
+<li><strong>environment</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>]</em>) – a probability list corresponding to the epigenetic environment.</li>
+<li><strong>maxmin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – maximization/minimization problem (Problem.MAXIMIZATION or Problem.MINIMIZATION).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#alg.epiga.epigeneticexception.EpigeneticException" title="alg.epiga.epigeneticexception.EpigeneticException"><strong>EpigeneticException</strong></a> – if the length of minv or maxv are different from the problem size.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-alg.epiga.problems.floatproblem">
+<span id="float-problem"></span><h4>Float Problem<a class="headerlink" href="#module-alg.epiga.problems.floatproblem" title="Permalink to this headline">¶</a></h4>
+<dl class="class">
+<dt id="alg.epiga.problems.floatproblem.FloatProblem">
+<em class="property">class </em><code class="descclassname">alg.epiga.problems.floatproblem.</code><code class="descname">FloatProblem</code><span class="sig-paren">(</span><em>name</em>, <em>size</em>, <em>minv</em>, <em>maxv</em>, <em>environment</em>, <em>maxmin</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/problems/floatproblem.html#FloatProblem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.problems.floatproblem.FloatProblem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#alg.epiga.problems.numericproblem.NumericProblem" title="alg.epiga.problems.numericproblem.NumericProblem"><code class="xref py py-class docutils literal"><span class="pre">alg.epiga.problems.numericproblem.NumericProblem</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.7)"><code class="xref py py-class docutils literal"><span class="pre">abc.ABC</span></code></a></p>
+<p>Float problem.
+Represents problems represented as Float numbers.</p>
+<p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – the problem name.</li>
+<li><strong>size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – the number of values in the solution vector.</li>
+<li><strong>minv</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><em>Any</em><em>]</em>) – the lower limit of the variables.</li>
+<li><strong>maxv</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><em>Any</em><em>]</em>) – the upper limit of the variables.</li>
+<li><strong>environment</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>]</em>) – a probability list corresponding to the epigenetic environment.</li>
+<li><strong>maxmin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – maximization/minimization problem (Problem.MAXIMIZATION or Problem.MINIMIZATION).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#alg.epiga.epigeneticexception.EpigeneticException" title="alg.epiga.epigeneticexception.EpigeneticException"><strong>EpigeneticException</strong></a> – if the length of minv or maxv are different from the problem size.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="module-alg.epiga.problems.permutationproblem">
+<span id="permutation-problem"></span><h3>Permutation Problem<a class="headerlink" href="#module-alg.epiga.problems.permutationproblem" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="alg.epiga.problems.permutationproblem.PermutationProblem">
+<em class="property">class </em><code class="descclassname">alg.epiga.problems.permutationproblem.</code><code class="descname">PermutationProblem</code><span class="sig-paren">(</span><em>name</em>, <em>elements</em>, <em>environment</em>, <em>maxmin</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/alg/epiga/problems/permutationproblem.html#PermutationProblem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#alg.epiga.problems.permutationproblem.PermutationProblem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#alg.epiga.problems.problem.Problem" title="alg.epiga.problems.problem.Problem"><code class="xref py py-class docutils literal"><span class="pre">alg.epiga.problems.problem.Problem</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.7)"><code class="xref py py-class docutils literal"><span class="pre">abc.ABC</span></code></a></p>
+<p>Permutation problem.
+Represents problems involving permutations like TSP, Graph Colouring Problem, etc.</p>
+<p>Problem Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – the problem name.</li>
+<li><strong>elements</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a>) – the elements used in the problem solution.</li>
+<li><strong>environment</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>]</em>) – a probability list corresponding to the epigenetic environment.</li>
+<li><strong>maxmin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – maximization/minimization problem (Problem.MAXIMIZATION or Problem.MINIMIZATION).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
+<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
+<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The epiGenetic Algorithm</a><ul>
+<li><a class="reference internal" href="#module-alg.epiga.epiga">epiGA</a></li>
+<li><a class="reference internal" href="#module-alg.epiga.epigeneticpopulation">epiGenetic Population</a></li>
+<li><a class="reference internal" href="#module-alg.epiga.epigeneticindividual">epiGenetic Individual</a></li>
+<li><a class="reference internal" href="#module-alg.epiga.epigeneticcell">epiGenetic Cell</a></li>
+<li><a class="reference internal" href="#module-alg.epiga.epigeneticexception">epiGenetic Exception</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-alg.epiga.operators">Operators</a><ul>
+<li><a class="reference internal" href="#module-alg.epiga.operators.selectionoperator">Selection Operator</a><ul>
+<li><a class="reference internal" href="#module-alg.epiga.operators.binarytournamentselection">Binary Tournament Selection</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-alg.epiga.operators.reproductionoperator">Reproduction Operator</a><ul>
+<li><a class="reference internal" href="#module-alg.epiga.operators.nucleosomebasedreproduction">Nuclesome Based Reproduction</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-alg.epiga.operators.epigeneticoperator">epiGenetic Operator</a><ul>
+<li><a class="reference internal" href="#module-alg.epiga.operators.binarygenesilencing">Binary Gene Silencing</a></li>
+<li><a class="reference internal" href="#module-alg.epiga.operators.numericgenesilencing">Numeric Gene Silencing</a></li>
+<li><a class="reference internal" href="#module-alg.epiga.operators.permutationgenesilencing">Permutation Gene Silencing</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-alg.epiga.operators.replacementoperator">Replacement Operator</a><ul>
+<li><a class="reference internal" href="#module-alg.epiga.operators.elitistreplacement">Elitist Replacement</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-alg.epiga.operators.nucleosomegenerator">Nucleosome Generator</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-alg.epiga.problems">Problems</a><ul>
+<li><a class="reference internal" href="#module-alg.epiga.problems.problem">Problem</a><ul>
+<li><a class="reference internal" href="#module-alg.epiga.problems.binaryproblem">Binary Problem</a></li>
+<li><a class="reference internal" href="#module-alg.epiga.problems.numericproblem">Numeric Problem</a><ul>
+<li><a class="reference internal" href="#module-alg.epiga.problems.integerproblem">Integer Problem</a></li>
+<li><a class="reference internal" href="#module-alg.epiga.problems.floatproblem">Float Problem</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-alg.epiga.problems.permutationproblem">Permutation Problem</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">epiGA 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Daniel H. Stolfi.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
+    </div>
+  </body>
+</html>
