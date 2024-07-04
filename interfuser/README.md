@@ -15,9 +15,9 @@ Clone the project and set the environment
 
 ```sh
 git clone https://github.com/Simula-COMPLEX/EpiTESTER.git
-cd EpiTESTER
-conda create -n epitester python=3.7
-conda activate epitester
+cd EpiTESTER/interfuser
+conda create -n interfuser python=3.7
+conda activate interfuser
 pip3 install -r requirements.txt
 ```
 
