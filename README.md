@@ -23,3 +23,13 @@ Please refer to [how to run with Interfuser](https://github.com/Simula-COMPLEX/E
 
 Please refer to [how to run with TCP](https://github.com/Simula-COMPLEX/EpiTESTER/blob/main/tcp/README.md)
 
+## Acknowledgements
+
+Our implementation is based on the following repository:
+
+[Interfuser](https://github.com/opendilab/InterFuser)
+[TCP](https://github.com/OpenDriveLab/TCP)
+[Transfuser](https://github.com/autonomousvision/transfuser)
+[CARLA Leaderboard](https://github.com/carla-simulator/leaderboard)
+[Scenario Runner](https://github.com/carla-simulator/scenario_runner)
+
