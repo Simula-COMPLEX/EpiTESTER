@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+#
 # Download and install CARLA
 mkdir carla
 cd carla
