@@ -151,14 +151,19 @@ def main(args):
 
     L = 10
 
-    envs = {'scenario_1': [0.9978, 0.9999, 0.6610, 0.9978, 0.9999, 0.9861, 1.0000, 0.9761,
-                           0.9981, 0.6075],
+    envs = {
+            'scenario_1': [0.6616, 0.9924, 0.6521, 0.9978, 0.9999, 0.9861, 1.0000, 0.9761,
+                       0.9981, 0.6075],
             'scenario_2': [0.9492, 0.9961, 0.5908, 0.9811, 0.1556, 0.6454, 0.1561, 0.9282,
-                           0.0060, 0.5017],
+                       0.0060, 0.5017],
             'scenario_3': [0.4335, 0.9950, 0.6238, 0.9467, 0.9354, 0.6524, 0.2173, 0.9658,
-                           0.0291, 0.5827],
+                       0.0291, 0.5827],
             'scenario_4': [0.8298, 0.9971, 0.5753, 0.9398, 0.7376, 0.8373, 0.2104, 0.8913,
-                           0.0184, 0.7678],
+                       0.0184, 0.7678],
+            'scenario_5': [0.6815, 0.9974, 0.6640, 0.9096, 0.9112, 0.8489, 0.1462, 0.9606,
+                       0.0090, 0.551],
+            'scenario_6': [0.3335, 0.9928, 0.4719, 0.9506, 0.9409, 0.8725, 0.3346, 0.9720,
+                       0.0084, 0.3989]
             }
 
     env = envs[args.scenario_id]
@@ -202,12 +207,12 @@ if __name__ == '__main__':
 
     # simulation setup
     parser.add_argument('--routes',
-                        default='{}/leaderboard/data/42routes/Scenario1_Town1.xml'.format(PATH),
+                        default='{}/leaderboard/data/scenarios/scenario_1.xml'.format(PATH),
                         help='Name of the route to be executed. Point to the route_xml_file to be executed.',
                         # required=True
                         )
     parser.add_argument('--scenarios',
-                        default='{}/leaderboard/data/42routes/Scenario1_Town1.json'.format(PATH),
+                        default='{}/leaderboard/data/scenarios/scenario_1.json'.format(PATH),
                         help='Name of the scenario annotation file to be mixed with the route.',
                         # required=True
                         )
