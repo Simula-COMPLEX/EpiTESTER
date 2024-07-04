@@ -21,5 +21,5 @@ Please refer to [how to run with Interfuser](https://github.com/Simula-COMPLEX/E
 
 ## Test TCP
 
-Please refer to [how to run with Interfuser](https://github.com/Simula-COMPLEX/EpiTESTER/blob/main/tcp/README.md)
+Please refer to [how to run with TCP](https://github.com/Simula-COMPLEX/EpiTESTER/blob/main/tcp/README.md)
 
