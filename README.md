@@ -8,6 +8,7 @@
 - [Abstract](#abstract)
 - [Test Interfuser](#test-interfuser)
 - [Test TCP](#test-tcp)
+- [Acknowledgements](#acknowledgements)
 
 
 ## Abstract
@@ -28,8 +29,12 @@ Please refer to [how to run with TCP](https://github.com/Simula-COMPLEX/EpiTESTE
 Our implementation is based on the following repository:
 
 [Interfuser](https://github.com/opendilab/InterFuser)
+
 [TCP](https://github.com/OpenDriveLab/TCP)
+
 [Transfuser](https://github.com/autonomousvision/transfuser)
+
 [CARLA Leaderboard](https://github.com/carla-simulator/leaderboard)
+
 [Scenario Runner](https://github.com/carla-simulator/scenario_runner)
 
