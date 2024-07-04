@@ -15,21 +15,16 @@ Clone the project and set the environment
 
 ```sh
 git clone https://github.com/Simula-COMPLEX/EpiTESTER.git
-cd EpiTESTER
-conda create -n epitester python=3.7
-conda activate epitester
+cd EpiTESTER/tcp
+conda create -n tcp python=3.7
+conda activate tcp
 pip3 install -r requirements.txt
 ```
 
-Configure the ADS under test (i.e., [Interfuser](https://github.com/opendilab/InterFuser))
+Configure the ADS under test (i.e., [TCP](https://github.com/OpenDriveLab/TCP))
 
-> Download the pre-trained Interfuser [model](http://43.159.60.142/s/p2CN) and place it in the [leaderboard/team_code](https://github.com/Simula-COMPLEX/EpiTESTER/tree/main/leaderboard/team_code) folder.
-
-```sh
-## ads
-cd interfuser
-python setup.py develop
-```
+> Download the pre-trained TCP [model](https://hkustconnect-my.sharepoint.com/:u:/g/personal/qzhangcb_connect_ust_hk/ETe4OX79JldIsvgNGIs5NmIBkJnfPDG2G5Ij-8ha518rOw?e=BG1dek) and place it in the [tcp/leaderboard/leaderboard/model](https://github.com/Simula-COMPLEX/EpiTESTER/tree/main/leaderboard/team_code) folder.
+> 
 
 Configure the Simulator (i.e., [CARLA](https://carla.org/))
 
