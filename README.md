@@ -17,5 +17,9 @@ Testing autonomous vehicles (AVs) under various environmental scenarios that lea
 
 ## Test Interfuser
 
+Please refer to [how to run with Interfuser](https://github.com/Simula-COMPLEX/EpiTESTER/blob/main/interfuser/README.md)
 
 ## Test TCP
+
+Please refer to [how to run with Interfuser](https://github.com/Simula-COMPLEX/EpiTESTER/blob/main/tcp/README.md)
+
